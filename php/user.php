@@ -170,6 +170,12 @@
                 </div>
 
                 <div class="col-12 col-lg-7 mt-3">
+                    <div class="row mb-3">
+                        <div class="col-12">
+                            <a class="btn btn-outline-success" href="./additem.php">Add Item</a>
+                            <button class="btn btn-outline-warning">Edit Profile</button>
+                        </div>
+                    </div>
                     <h1 class="alert alert-danger text-center">Item Details of user</h1>
                     <div class="row ">
                         <div class="col-6">
