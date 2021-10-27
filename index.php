@@ -63,7 +63,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                 <a class="nav-link" href="php/products.php">Trending</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="./php/about.php">About Us</a>
+                <a class="nav-link" href="./php/aboutus.php">About Us</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="./php/contact.php">Contact Us</a>
@@ -71,6 +71,9 @@ https://templatemo.com/tm-546-sixteen-clothing
               
               <li class="nav-item">
                 <a class="nav-link" href="./php/signup.php">Join</a>
+              </li>
+              <li class="nav-item">
+                    <a class="nav-link " href="./php/user.php">Me</a>
               </li>
             </ul>
           </div>
