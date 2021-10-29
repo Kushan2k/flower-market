@@ -106,6 +106,44 @@ https://templatemo.com/tm-546-sixteen-clothing
       </div>
     </div>
     <!-- Banner Ends Here -->
+    <div class=" container mt-3 search-box ">
+      <div class="row ">
+        <div class=" col-12 col-md-8  mx-auto ">
+          <form action="./php/products.php" method="GET">
+            <div class=" form-inline box">
+              
+                <input type="text" placeholder="Search Here!" class=" form-control" name="q">
+                <h4 class="text-center mx-2">By</h4>
+                <select class=" form-control custom-select" name="type" >
+                  <option value="Name">Name</option>
+                  <option value="Name">Location</option>
+                  <option value="Name">Color</option>
+                  <option value="Name">Price</option>
+                  <option value="Name">
+                    Type
+                  </option>
+                </select>
+              
+              <input type="submit" value="Search" class="btn btn-success ml-lg-5 mt-2 mt-lg-0" >
+            </div>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .box{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+
+    </style>
+
+    
+    
 
     <div class="latest-products">
       <div class="container">
@@ -113,17 +151,16 @@ https://templatemo.com/tm-546-sixteen-clothing
           <div class="col-md-12">
             <div class="section-heading">
               <h2>Latest Products</h2>
-              <a href="./php/item.php">view all products <i class="fa fa-angle-right"></i></a>
+              <a href="./php/products.php?view=all">view all products <i class="fa fa-angle-right"></i></a>
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-4 col-12">
             <div class="product-item">
-              <a href="#"><img src="assets/images/product_01.jpg" alt=""></a>
+              <a href="./php/item.php"><img src="assets/images/product_01.jpg" alt=""></a>
               <div class="down-content">
                 <a href="./php/item.php"><h4>Tittle goes here</h4></a>
                 <h6>$25.75</h6>
                 <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                <p class=" text-muted">Views</p>
               </div>
               <div class="mb-4 ml-3">
                   <a href="./php/item.php" class="btn btn-outline-success">Go To Product</a>

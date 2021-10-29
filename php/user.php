@@ -178,7 +178,7 @@
                     </div>
                     <h1 class="alert alert-danger text-center">Item Details of user</h1>
                     <div class="row ">
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             
                             <div class="product-item">
                             <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
@@ -195,7 +195,7 @@
           
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             
                             <div class="product-item">
                             <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
@@ -212,7 +212,7 @@
           
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-12 col-md-6">
                             
                             <div class="product-item">
                             <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>

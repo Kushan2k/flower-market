@@ -42,7 +42,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <!-- ***** Preloader End ***** -->
 
     <!-- Header -->
-    <header class="">
+    <header class=" position-relative">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
           <a class="navbar-brand" href="index.php"><h2>Sixteen <em>Clothing</em></h2></a>
@@ -82,7 +82,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     </header>
 
     <!-- Page Content -->
-    <div class="page-heading products-heading header-text">
+    <!-- <div class="page-heading products-heading header-text">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
@@ -93,44 +93,32 @@ https://templatemo.com/tm-546-sixteen-clothing
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
+
+    
 
     
     <div class="products">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="filters">
-              <ul>
-                  <li class="active" data-filter="*">All Products</li>
-                  <li data-filter=".des">Featured</li>
-                  <li data-filter=".dev">Flash Deals</li>
-                  <li data-filter=".gra">Last Minute</li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-12">
             <div class="filters-content">
                 <div class="row grid">
-                    <div class="col-lg-4 col-md-4 all des">
+                    <div class="col-12 col-lg-4 col-md-4 all des">
                       <div class="product-item">
-                        <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
+                        <a href="./item.php"><img src="../assets/images/product_01.jpg" alt=""></a>
                         <div class="down-content">
-                          <a href="#"><h4>Tittle goes here</h4></a>
+                          <a href="./item.php"><h4>Tittle goes here</h4></a>
                           <h6>$18.25</h6>
                           <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                          <ul class="stars">
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                            <li><i class="fa fa-star"></i></li>
-                          </ul>
-                          <span>Reviews (12)</span>
+                          
+                          <span>Views (12)</span>
                         </div>
+                        <a href="./item.php" class=" btn btn-outline-success">View Product</a>
                       </div>
                     </div>
-
+                    
+                    
                     
                     
                     

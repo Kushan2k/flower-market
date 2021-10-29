@@ -124,7 +124,7 @@
 
                     <div class="form-group mt-4">
                         <input type="submit" class="btn btn-success" value="List Now" >
-                        <input type="reset" class="btn btn-warning" value="List Now" >
+                        <input type="reset" class="btn btn-warning" value="Not Now" >
                     </div>
 
                 </form>
