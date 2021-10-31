@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
+  $login = true;
+} else {
+  $login = false;
+}
+
+?>
 
 <head>
 
@@ -53,13 +62,15 @@ https://templatemo.com/tm-546-sixteen-clothing
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item ">
-              <a class="nav-link" href="../index.php">Home
+            <li class="nav-item active">
+              <a class="nav-link" href="../index.php">
 
+                Home
+                <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="./products.php">Products</a>
+              <a class="nav-link" href="">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./products.php">Trending</a>
@@ -71,15 +82,27 @@ https://templatemo.com/tm-546-sixteen-clothing
               <a class="nav-link" href="./contact.php">Contact Us</a>
             </li>
 
+
+            <?php
+            if ($login) {
+              echo "<li class='nav-item'>
+              <a class='nav-link ' href='./user.php?user_id=" . $_COOKIE['uid'] . "'>Me</a>
+            </li>";
+              echo
+              '
             <li class="nav-item">
+              <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+            </li>
+            ';
+            } else {
+              echo '<li class="nav-item">
               <a class="nav-link" href="./signup.php">Join</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="./user.php">Me</a>
-            </li>
+            </li>';
+            }
+
+            ?>
+
+
           </ul>
         </div>
       </div>

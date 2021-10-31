@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
+  $login = true;
+} else {
+  $login = false;
+}
+
+?>
 
 <head>
 
@@ -73,15 +82,27 @@ https://templatemo.com/tm-546-sixteen-clothing
               <a class="nav-link" href="./php/contact.php">Contact Us</a>
             </li>
 
+
+            <?php
+            if ($login) {
+              echo "<li class='nav-item'>
+              <a class='nav-link ' href='./php/user.php'>Me</a>
+            </li>";
+              echo
+              '
             <li class="nav-item">
               <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
             </li>
-            <li class="nav-item">
+            ';
+            } else {
+              echo '<li class="nav-item">
               <a class="nav-link" href="./php/signup.php">Join</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="./php/user.php">Me</a>
-            </li>
+            </li>';
+            }
+
+            ?>
+
+
           </ul>
         </div>
       </div>

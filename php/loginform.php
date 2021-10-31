@@ -1,4 +1,9 @@
 <html lang="en">
+<?php
+if (!isset($_SESSION)) {
+  session_start();
+}
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -100,7 +105,15 @@
             <h4 class="card-title mt-3 text-center">Join Now</h4>
             <p class="text-center">Welcome <br />Get Started With Selling</p>
 
-            <form>
+            <?php
+            if (isset($_SESSION['success'])) {
+              echo "<p class='alert alert-success text-center error'>" . $_SESSION['success'] . "</p>";
+              $_SESSION['success'] = null;
+            }
+
+            ?>
+
+            <form action="./register.php" method="POST">
               <!-- form-group// -->
               <div class="form-group input-group">
                 <div class="input-group-prepend">
@@ -108,7 +121,7 @@
                     <i class="fa fa-envelope"></i>
                   </span>
                 </div>
-                <input name="" class="form-control" placeholder="Email address" type="email" />
+                <input name="email" class="form-control" placeholder="Email address" type="email" />
               </div>
               <!-- form-group// -->
 
@@ -120,11 +133,11 @@
                     <i class="fa fa-lock"></i>
                   </span>
                 </div>
-                <input class="form-control" placeholder="Password" type="password" />
+                <input name="password" class="form-control" placeholder="Password" type="password" />
               </div>
 
               <div class="form-group">
-                <button type="submit" class="btn btn-primary btn-block">
+                <button type="submit" name="login" class="btn btn-primary btn-block">
                   Sign In
                 </button>
               </div>
@@ -151,6 +164,19 @@
 
   <!-- Additional Scripts -->
   <script src="../assets/js/custom.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(rmError, 2000);
+    })
+
+    function rmError() {
+      let error = document.querySelector('.error');
+      if (error) {
+        error.remove()
+      }
+    }
+  </script>
 
 </body>
 

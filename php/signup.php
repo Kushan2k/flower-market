@@ -1,4 +1,7 @@
 <html lang="en">
+<?php
+session_start();
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -97,6 +100,13 @@
     <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Create Account</h4>
       <p class="text-center">Get started with your free account</p>
+      <?php
+      if (isset($_SESSION['error'])) {
+        echo "<h5 class='alert alert-danger text-center error'>" . $_SESSION['error'] . "</h5>";
+        $_SESSION['error'] = null;
+      }
+
+      ?>
 
       <form action="./register.php" method="POST">
         <div class="form-group input-group">
@@ -174,6 +184,19 @@
 
   <!-- Additional Scripts -->
   <script src="../assets/js/custom.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(rmError, 2000);
+    })
+
+    function rmError() {
+      let error = document.querySelector('.error');
+      if (error) {
+        error.remove()
+      }
+    }
+  </script>
 
 </body>
 
