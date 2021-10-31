@@ -1,5 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+
+include_once "./conn.php";
+
+if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
+    $login = true;
+} else {
+    $login = false;
+    header("Location:../index.php");
+}
+
+$id = (int)$_GET['user_id'] - 999;
+
+$sql = "SELECT name,email,city,address,mobile FROM user WHERE id=" . $id;
+
+$result = $conn->query($sql);
+if ($result == TRUE) {
+    if ($result->num_rows > 0) {
+        $row = $result->fetch_assoc();
+    } else {
+        echo 'no result';
+    }
+} else {
+    echo 'no profile';
+}
+
+
+
+?>
 
 <head>
 
@@ -61,7 +90,9 @@
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item ">
-                                <a class="nav-link" href="../index.php">Home
+                                <a class="nav-link" href="../index.php">
+
+                                    Home
 
                                 </a>
                             </li>
@@ -78,15 +109,27 @@
                                 <a class="nav-link" href="./contact.php">Contact Us</a>
                             </li>
 
+
+                            <?php
+                            if ($login) {
+                                echo "<li class='nav-item active'>
+                            <a class='nav-link ' href='./user.php?user_id=" . $_COOKIE['uid'] . "'>Me</a>
+                            </li>";
+                                echo
+                                '
                             <li class="nav-item">
-                                <a class="nav-link" href="./signup.php">Join</a>
+                            <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="">Me</a>
-                            </li>
+                            ';
+                            } else {
+                                echo '<li class="nav-item">
+                            <a class="nav-link" href="./signup.php">Join</a>
+                            </li>';
+                            }
+
+                            ?>
+
+
                         </ul>
                     </div>
                 </div>
@@ -97,33 +140,29 @@
             <div class="row">
                 <div class="col-12 col-lg-5 profile-box">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span class="font-weight-bold">Edogaru</span><span class="text-black-50">edogaru@mail.com.my</span><span> </span>
+                        <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span class="font-weight-bold"><?php echo $row['name']; ?></span><span class="text-black-50"><?php echo $row['email']; ?></span><span> </span>
                     </div>
                     <h1 class="alert alert-success text-center text-capitalize">Profile Details</h1>
                     <div class="col-md-12">
-                        <label class="labels">Mobile Number</label><input type="text" class="form-control" placeholder="enter phone number" value="" />
+                        <label class="labels">Name</label><input type="text" class="form-control" readonly value="<?php echo $row['name']; ?>" />
                     </div>
                     <div class="col-md-12">
-                        <label class="labels">Address Line 1</label><input type="text" class="form-control" placeholder="enter address line 1" value="" />
+                        <label class="labels">Mobile Number</label><input readonly type="text" class="form-control" readonly placeholder="enter phone number" value="<?php echo $row['mobile']; ?>" />
                     </div>
                     <div class="col-md-12">
-                        <label class="labels">Address Line 2</label><input type="text" class="form-control" placeholder="enter address line 2" value="" />
+                        <label class="labels">Address</label><input readonly type="text" class="form-control" placeholder="enter address line 1" value="<?php echo $row['address']; ?>" />
                     </div>
                     <div class="col-md-12">
-                        <label class="labels">Postcode</label><input type="text" class="form-control" placeholder="enter address line 2" value="" />
+                        <label class="labels">City</label><input readonly type="text" class="form-control" placeholder="enter address line 2" value="<?php echo $row['city'] ?>" />
                     </div>
+
+
+
+
                     <div class="col-md-12">
-                        <label class="labels">State</label><input type="text" class="form-control" placeholder="enter address line 2" value="" />
+                        <label class="labels">Email</label><input type="text" readonly class="form-control" placeholder="enter email id" value="<?php echo $row['email']; ?>" />
                     </div>
-                    <div class="col-md-12">
-                        <label class="labels">Area</label><input type="text" class="form-control" placeholder="enter address line 2" value="" />
-                    </div>
-                    <div class="col-md-12">
-                        <label class="labels">Email ID</label><input type="text" class="form-control" placeholder="enter email id" value="" />
-                    </div>
-                    <div class="col-md-12">
-                        <label class="labels">Education</label><input type="text" class="form-control" placeholder="education" value="" />
-                    </div>
+
                 </div>
 
                 <div class="col-12 col-lg-7 mt-3">

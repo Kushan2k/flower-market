@@ -62,15 +62,15 @@ https://templatemo.com/tm-546-sixteen-clothing
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item active">
+            <li class="nav-item ">
               <a class="nav-link" href="../index.php">
 
                 Home
-                <span class="sr-only">(current)</span>
+
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">Products</a>
+              <a class="nav-link active" href="">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./products.php">Trending</a>
