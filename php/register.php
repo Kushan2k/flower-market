@@ -52,24 +52,19 @@ if (isset($_POST['login'])) {
 
             if ($result->num_rows > 0) {
 
-                $pass = $result->fetch_assoc()['password'];
                 $row = $result->fetch_assoc();
-                print_r($row['id']);
-
-                if (password_verify($password, $pass)) {
-
-                    echo 'hello';
-
-                    // echo $id;
-                    // echo $result->fetch_assoc()['password'];
 
 
-                    // echo $id + 999;
+                if (password_verify($password, $row['password'])) {
 
-                    // setcookie('uid', $id + 999, time() + 60 * 60 * 24 * 10, '/', '', $secure = true);
-                    // setcookie('u_email', $email, time() + 60 * 60 * 24 * 10, '/', '', $secure = true);
+                    $id = (int)$row['id'];
 
-                    // header('Location:../index.php');
+
+
+                    setcookie('uid', $id + 999, time() + 60 * 60 * 24 * 10, '/', '', $secure = true);
+                    setcookie('u_email', $email, time() + 60 * 60 * 24 * 10, '/', '', $secure = true);
+
+                    header('Location:../index.php');
                 } else {
                     echo 'dfsf';
                 }
