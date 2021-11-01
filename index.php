@@ -70,7 +70,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="php/products.php">Products</a>
+              <a class="nav-link" href="php/products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="php/products.php">Trending</a>
@@ -86,7 +86,7 @@ https://templatemo.com/tm-546-sixteen-clothing
             <?php
             if ($login) {
               echo "<li class='nav-item'>
-              <a class='nav-link ' href='./php/user.php'>Me</a>
+              <a class='nav-link ' href='./php/user.php?user_id=" . $_COOKIE['uid'] . "'>Me</a>
             </li>";
               echo
               '

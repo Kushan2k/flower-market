@@ -137,7 +137,15 @@ if ($result == TRUE) {
         </header>
 
         <div class="container mt-4">
+            <?php
+            if (isset($_SESSION['message-s'])) {
+                echo '<p class="alert alert-success text-center error">' . $_SESSION['message-s'] . '</p>';
+            } else if (isset($_SESSION['upload-errpr'])) {
+                echo '<p class="alert alert-danger text-center error">' . $_SESSION['upload-errpr'] . '</p>';
+            }
+            ?>
             <div class="row">
+
                 <div class="col-12 col-lg-5 profile-box">
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span class="font-weight-bold"><?php echo $row['name']; ?></span><span class="text-black-50"><?php echo $row['email']; ?></span><span> </span>
@@ -168,7 +176,7 @@ if ($result == TRUE) {
                 <div class="col-12 col-lg-7 mt-3">
                     <div class="row mb-3">
                         <div class="col-12">
-                            <a class="btn btn-outline-success" href="./additem.php">Add Item</a>
+                            <a class="btn btn-outline-success" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add">Add Item</a>
                             <button class="btn btn-outline-warning">Edit Profile</button>
                         </div>
                     </div>
@@ -265,6 +273,19 @@ if ($result == TRUE) {
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <!-- Additional Scripts -->
     <script src="../assets/js/custom.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(rmError, 2000);
+        })
+
+        function rmError() {
+            let error = document.querySelector('.error');
+            if (error) {
+                error.remove()
+            }
+        }
+    </script>
 
 </body>
 

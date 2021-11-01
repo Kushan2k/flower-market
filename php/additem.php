@@ -1,4 +1,18 @@
 <html lang="en">
+<?php
+if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
+  $login = true;
+} else {
+  $login = false;
+  header("Location:../index.php");
+}
+
+
+session_start();
+
+
+
+?>
 
 <head>
   <meta charset="UTF-8">
@@ -54,12 +68,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item ">
-              <a class="nav-link" href="../index.php">Home
+              <a class="nav-link" href="../index.php">
+
+                Home
 
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="./products.php">Products</a>
+              <a class="nav-link" href="./products.php">Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./products.php">Trending</a>
@@ -68,18 +84,30 @@
               <a class="nav-link" href="./aboutus.php">About Us</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="./contact.php">Contact Us</a>
+              <a class="nav-link" href="./contact.php">Contact Us</a>
             </li>
 
-            <li class="nav-item">
-              <a class="nav-link active" href="./signup.php">Join</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="./user.php">Me</a>
-            </li>
+
+            <?php
+            if ($login) {
+              echo "<li class='nav-item '>
+                            <a class='nav-link ' href='./user.php?user_id=" . $_COOKIE['uid'] . "'>Me</a>
+                            </li>";
+              echo
+              '
+                            <li class="nav-item">
+                            <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+                            </li>
+                            ';
+            } else {
+              echo '<li class="nav-item">
+                            <a class="nav-link" href="./signup.php">Join</a>
+                            </li>';
+            }
+
+            ?>
+
+
           </ul>
         </div>
       </div>
@@ -91,15 +119,22 @@
   <div class="container mt-4">
     <div class="row">
       <div class="col-12 col-lg-10 mx-auto">
-        <form>
+        <?php
+        if (isset($_SESSION['file_error'])) {
+          echo "<p class='alert alert-danger text-center error'>{$_SESSION['file_error']}</p>";
+          $_SESSION['file_error'] = null;
+        }
+
+        ?>
+        <form action="./saveitem.php" method="POST" enctype="multipart/form-data">
           <div class="form-group">
             <label for="formGroupExampleInput">Item Name<span class="text-danger">*</span></label>
-            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input">
+            <input type="text" class="form-control" required name="itemname" id="formGroupExampleInput" placeholder="Example input">
             <small class="text-muted">80 Charactors only</small>
           </div>
           <div class="form-group">
             <label for="formGroupExampleInput2">Discription<span class="text-danger">*</span></label>
-            <textarea class=" form-control" id="formGroupExampleInput2">
+            <textarea class=" form-control" id="formGroupExampleInput2" name="discription" required>
 
                         </textarea>
             <small class="text-muted">Must be at least 120 Charactors long</small>
@@ -107,31 +142,36 @@
 
           <div class="form-group">
             <label for="price">Price<span class="text-danger">*</span></label>
-            <input type="number" class="form-control" id="price" placeholder="29.89">
+            <input type="number" class="form-control" id="price" placeholder="29.89" name="itemprice" required>
             <small class="text-muted">Required</small>
           </div>
           <div class="form-group">
             <label for="inlineFormCustomSelect">Catogory <span class="text-danger">*</span></label>
-            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-              <option selected>Choose...</option>
+            <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type" required>
+              <option selected disabled>Choose...</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label for="price">Location/City<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" id="location" placeholder="Colombo" name="location" required>
+            <small class="text-muted">Item location</small>
           </div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <span class="input-group-text">Upload</span>
             </div>
             <div class="custom-file">
-              <input type="file" class="custom-file-input" id="inputGroupFile01">
+              <input type="file" class="custom-file-input" id="inputGroupFile01" name="itempicture" required>
               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
             </div>
           </div>
 
           <div class="form-group mt-4">
-            <input type="submit" class="btn btn-success" value="List Now">
-            <input type="reset" class="btn btn-warning" value="Not Now">
+            <input type="submit" class="btn btn-success" value="List Now" name="add-item">
+            <a class="btn btn-warning" href="./user.php?user_id=<?php echo $_GET['user_id']; ?>">Not Now</a>
           </div>
 
         </form>
@@ -153,6 +193,19 @@
 
   <!-- Additional Scripts -->
   <script src="../assets/js/custom.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      setTimeout(rmError, 2000);
+    })
+
+    function rmError() {
+      let error = document.querySelector('.error');
+      if (error) {
+        error.remove()
+      }
+    }
+  </script>
 
 </body>
 
