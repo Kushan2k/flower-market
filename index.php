@@ -2,6 +2,7 @@
 <html lang="en">
 <?php
 
+include_once "./php/conn.php";
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   $login = true;
 } else {
@@ -180,21 +181,41 @@ https://templatemo.com/tm-546-sixteen-clothing
             <a href="./php/products.php?view=all">view all products <i class="fa fa-angle-right"></i></a>
           </div>
         </div>
-        <div class="col-md-4 col-12">
-          <div class="product-item">
-            <a href="./php/item.php"><img src="assets/images/product_01.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="./php/item.php">
-                <h4>Tittle goes here</h4>
-              </a>
-              <h6>$25.75</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-            </div>
-            <div class="mb-4 ml-3">
-              <a href="./php/item.php" class="btn btn-outline-success">Go To Product</a>
-            </div>
-          </div>
-        </div>
+        <?php
+        $sql = "SELECT id,name,discription,price,view_count,pic_url,user_id FROM item ORDER BY post_date LIMIT 20";
+        $res = $conn->query($sql);
+        if ($res == TRUE) {
+          if ($res->num_rows > 0) {
+            while ($row = $res->fetch_assoc()) {
+              echo
+              "
+                      <div class='col-md-4 col-12'>
+                        <div class='product-item'>
+                          <a href='./php/item.php'><img src='./php/{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./php/item.php'>
+                              <h4>{$row['name']}</h4>
+                            </a>
+                            <h6>$25.75</h6>
+                            <p>{$row['discription']}.</p>
+                          </div>
+                          <div class='mb-4 ml-3'>
+                            <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                          </div>
+                        </div>
+                      </div>
+              ";
+            }
+          } else {
+            echo "<p class='alert alert-warning text-center'>No Items Yet!<br>Keep Wait</p>";
+          }
+        } else {
+          echo "<p class='alert alert-danger text-center w-100'>Connecting error! <br>Please contact us..<a href='./php/contact.php'>in Here</a></p>";
+        }
+
+
+
+        ?>
 
 
 
