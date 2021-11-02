@@ -182,13 +182,14 @@ https://templatemo.com/tm-546-sixteen-clothing
           </div>
         </div>
         <?php
-        $sql = "SELECT id,name,discription,price,view_count,pic_url,user_id FROM item ORDER BY post_date LIMIT 20";
+        $sql = "SELECT id,name,discription,price,pic_url,user_id FROM item ORDER BY post_date LIMIT 20";
         $res = $conn->query($sql);
         if ($res == TRUE) {
           if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
-              echo
-              "
+              if (($_COOKIE['uid'] - 999) != $row['user_id']) {
+                echo
+                "
                       <div class='col-md-4 col-12'>
                         <div class='product-item'>
                           <a href='./php/item.php'><img src='./php/{$row['pic_url']}' alt=''></a>
@@ -199,12 +200,34 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <h6>$25.75</h6>
                             <p>{$row['discription']}.</p>
                           </div>
-                          <div class='mb-4 ml-3'>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                            <button class='btn btn-outline-success mt-md-2'>Add To Basket</button>
                           </div>
                         </div>
                       </div>
-              ";
+                  ";
+              } else {
+                echo
+                "
+                      <div class='col-md-4 col-12'>
+                        <div class='product-item'>
+                          <a href='./php/item.php'><img src='./php/{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./php/item.php'>
+                              <h4>{$row['name']}</h4>
+                            </a>
+                            <h6>$25.75</h6>
+                            <p>{$row['discription']}.</p>
+                          </div>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
+                            <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                            
+                          </div>
+                        </div>
+                      </div>
+                  ";
+              }
             }
           } else {
             echo "<p class='alert alert-warning text-center'>No Items Yet!<br>Keep Wait</p>";

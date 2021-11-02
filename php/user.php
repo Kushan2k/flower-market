@@ -182,62 +182,43 @@ if ($result == TRUE) {
                     </div>
                     <h1 class="alert alert-danger text-center">Item Details of user</h1>
                     <div class="row ">
-                        <div class="col-12 col-md-6">
 
-                            <div class="product-item">
-                                <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
-                                <div class="down-content">
-                                    <a href="./php/item.php">
-                                        <h4>Tittle goes here</h4>
-                                    </a>
-                                    <h6>$25.75</h6>
-                                    <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                    <p class=" text-muted">Views</p>
-                                </div>
-                                <div class="mb-4 ml-3">
-                                    <a href="./php/item.php" class="btn btn-outline-success">Go To Product</a>
-                                </div>
-                            </div>
+                        <?php
+                        $id = $_GET['user_id'] - 999;
+                        $sql = "SELECT id,name,discription,price,view_count,pic_url,user_id FROM item WHERE user_id={$id} ORDER BY post_date LIMIT 20";
+                        $res = $conn->query($sql);
+                        if ($res == TRUE) {
+                            if ($res->num_rows > 0) {
+                                while ($row = $res->fetch_assoc()) {
+                                    echo
+                                    "
+                                        <div class='col-md-6 col-12'>
+                                            <div class='product-item'>
+                                            <a href='./php/item.php'><img src='./{$row['pic_url']}' alt=''></a>
+                                            <div class='down-content'>
+                                                <a href='./php/item.php'>
+                                                <h4>{$row['name']}</h4>
+                                                </a>
+                                                <h6>$25.75</h6>
+                                                <p>{$row['discription']}.</p>
+                                            </div>
+                                            <div class='mb-4 ml-3'>
+                                                <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                                            </div>
+                                            </div>
+                                        </div>
+              ";
+                                }
+                            } else {
+                                echo "<p class='alert alert-warning text-center'>No Items Yet!<br>Keep Wait</p>";
+                            }
+                        } else {
+                            echo "<p class='alert alert-danger text-center w-100'>Connecting error! <br>Please contact us..<a href='./php/contact.php'>in Here</a></p>";
+                        }
 
-                        </div>
 
-                        <div class="col-12 col-md-6">
 
-                            <div class="product-item">
-                                <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
-                                <div class="down-content">
-                                    <a href="./php/item.php">
-                                        <h4>Tittle goes here</h4>
-                                    </a>
-                                    <h6>$25.75</h6>
-                                    <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                    <p class=" text-muted">Views</p>
-                                </div>
-                                <div class="mb-4 ml-3">
-                                    <a href="./php/item.php" class="btn btn-outline-success">Go To Product</a>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="col-12 col-md-6">
-
-                            <div class="product-item">
-                                <a href="#"><img src="../assets/images/product_01.jpg" alt=""></a>
-                                <div class="down-content">
-                                    <a href="./php/item.php">
-                                        <h4>Tittle goes here</h4>
-                                    </a>
-                                    <h6>$25.75</h6>
-                                    <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-                                    <p class=" text-muted">Views</p>
-                                </div>
-                                <div class="mb-4 ml-3">
-                                    <a href="./php/item.php" class="btn btn-outline-success">Go To Product</a>
-                                </div>
-                            </div>
-
-                        </div>
+                        ?>
 
 
                     </div>
