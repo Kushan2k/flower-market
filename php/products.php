@@ -2,11 +2,27 @@
 <html lang="en">
 <?php
 
+include_once './conn.php';
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   $login = true;
 } else {
   $login = false;
 }
+
+$sql = '';
+if (isset($_GET['view'])) {
+  switch ($_GET['view']) {
+    case 'trending':
+      $sql = "SELECT name,id,price,view_count,discription,user_id,pic_url FROM item ORDER BY view_count DESC";
+      break;
+    case 'all':
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item ORDER BY post_date";
+      break;
+  }
+} else {
+  header('Location:../index.php');
+}
+
 
 ?>
 
@@ -70,10 +86,10 @@ https://templatemo.com/tm-546-sixteen-clothing
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="">Products</a>
+              <a class="nav-link active" href="./products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./products.php">Trending</a>
+              <a class="nav-link" href="./products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./aboutus.php">About Us</a>
@@ -132,25 +148,68 @@ https://templatemo.com/tm-546-sixteen-clothing
         <div class="col-md-12">
           <div class="filters-content">
             <div class="row grid">
-              <div class="col-12 col-lg-4 col-md-4 all des">
-                <div class="product-item">
-                  <a href="./item.php"><img src="../assets/images/product_01.jpg" alt=""></a>
-                  <div class="down-content">
-                    <a href="./item.php">
-                      <h4>Tittle goes here</h4>
-                    </a>
-                    <h6>$18.25</h6>
-                    <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
 
-                    <span>Views (12)</span>
-                  </div>
-                  <a href="./item.php" class=" btn btn-outline-success">View Product</a>
-                </div>
-              </div>
+              <?php
+
+              $re = $conn->query($sql);
+              if ($re == TRUE) {
+                if ($re->num_rows > 0) {
+                  while ($row = $re->fetch_assoc()) {
+                    $itemID = (int)$row['id'] + 1254;
+                    $name = ucwords($row['name']);
+
+                    if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
+                      echo
+                      "
+                      <div class='col-12 col-lg-4 col-md-4 all des'>
+                        <div class='product-item'>
+                          <a href='./item.php?item={$itemID}'><img src='{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./item.php?item={$itemID}'>
+                              <h4>{$name}</h4>
+                            </a>
+                            <h6>LKR {$row['price']}</h6>
+                            <p>{$row['discription']}.</p>
+
+                            <span>Views ({$row['view_count']})</span>
+                          </div>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
+                            
+                          </div>
+                        </div>
+                      </div>
+                      ";
+                    } else {
+                      echo
+                      "
+                      <div class='col-12 col-lg-4 col-md-4 all des'>
+                        <div class='product-item'>
+                          <a href='./item.php?item={$itemID}'><img src='{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./item.php?item={$itemID}'>
+                              <h4>{$name}</h4>
+                            </a>
+                            <h6>LKR {$row['price']}</h6>
+                            <p>{$row['discription']}.</p>
+
+                            <span>Views ({$row['view_count']})</span>
+                          </div>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
+                            <button class='btn btn-outline-success mt-md-2'>Add To Basket</button>
+                          </div>
+                        </div>
+                      </div>
+                      ";
+                    }
+                  }
+                }
+              }
 
 
 
-
+              ?>
 
 
             </div>

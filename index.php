@@ -74,7 +74,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               <a class="nav-link" href="php/products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="php/products.php">Trending</a>
+              <a class="nav-link" href="php/products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./php/aboutus.php">About Us</a>

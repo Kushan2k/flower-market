@@ -3,6 +3,26 @@ if (!isset($_GET['item'])) {
   header('Location:../index.php');
 }
 include_once './conn.php';
+$itemID = (int)$_GET['item'] - 1254;
+
+$sql = "SELECT view_count FROM item WHERE id={$itemID};";
+$re = $conn->query($sql);
+if ($re == TRUE) {
+  if ($re->num_rows > 0) {
+    $count = (int)$re->fetch_assoc()['view_count'];
+    $count = $count + 1;
+    $sql = "UPDATE item SET view_count={$count} WHERE id={$itemID}";
+    // if ($conn->query($sql) != TRUE) {
+    //   header("Location:../index.php");
+    // }
+  } else {
+    header("Location:../index.php");
+  }
+} else {
+  header('Location:../index.php');
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -89,8 +109,8 @@ https://templatemo.com/tm-546-sixteen-clothing
     <div class="card">
       <div class="row g-0">
         <?php
-        $itemID = (int)$_GET['item'] - 1254;
-        $sql = "SELECT name,discription,price,view_count,location,pic_url,post_date,user_id
+
+        $sql = "SELECT name,discription,price,view_count,location,pic_url,post_date,user_id,type
           FROM item WHERE id={$itemID}
           ";
         $result = $conn->query($sql);
@@ -99,40 +119,80 @@ https://templatemo.com/tm-546-sixteen-clothing
             $row = $result->fetch_assoc();
             $name = ucwords($row['name']);
 
-            echo
-            "
-            <div class='col-md-6 border-end'>
-              <div class='d-flex flex-column justify-content-center'>
-                <div class='main_image border'>
-                  <img src='{$row['pic_url']}' id='main_product_image' width='100%'/>
-                </div>
+            if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
+              echo
+              "
+                <div class='col-md-6 border-end'>
+                  <div class='d-flex flex-column justify-content-center'>
+                    <div class='main_image border'>
+                      <img src='{$row['pic_url']}' id='main_product_image' width='100%'/>
+                    </div>
 
-              </div>
-            </div>
-            <div class='col-md-6'>
-              <div class='p-3 right-side'>
-                <div class='d-flex justify-content-between align-items-center'>
-                  <h3>{$name}</h3> <span class='heart'><i class='bx bx-heart'></i></span>
+                  </div>
                 </div>
-                <div class='mt-2 pr-3 content'>
-                  <p>{$row['discription']}</p>
-                </div>
-                <h4>LKR {$row['price']}</h4>
-                <div class='ratings d-flex flex-row align-items-center'>
-                  <div class='d-flex flex-row'> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i> </div> <span>{$row['view_count']} views</span>
-                </div>
-                <div class='mt-5'> <span class='fw-bold'>Color</span>
-                  
-                </div>
-                <div class='buttons d-flex flex-row mt-5 gap-3'>
-                  <button class='btn btn-outline-dark'>Buy Now</button>
-                  <button class='btn btn-dark ml-3'>Add to Basket</button>
-                  <button class='btn btn-warning ml-3'>Edit</button>
-                </div>
+                <div class='col-md-6'>
+                  <div class='p-3 right-side'>
+                    <div class='d-flex justify-content-between align-items-center'>
+                      <h3>{$name}</h3> <span class='heart'><i class='bx bx-heart'></i></span>
+                    </div>
+                    <div class='mt-2 pr-3 content'>
+                      <p>{$row['discription']}</p>
+                    </div>
+                    <h4>LKR {$row['price']}</h4>
+                    <div class='ratings d-flex flex-row align-items-center'>
+                      <div class='d-flex flex-row'> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i> </div> <span>{$row['view_count']} views</span>
+                    </div>
+                    <div class='mt-5'> <span class='fw-bold'>Type</span>
+                      <p class='m-3'>{$row['type']}</p>
+                      <p class='text-muted'>{$row['post_date']}</p>
+                      <P class='text-danger'>Views ({$row['view_count']})</p>
+                    </div>
+                    <div class='buttons d-flex flex-row mt-5 gap-3'>
+                      
+                      <button class='btn btn-warning'>Edit</button>
+                    </div>
 
-              </div>
-            </div>
-            ";
+                  </div>
+                </div>
+                ";
+            } else {
+              echo
+              "
+                <div class='col-md-6 border-end'>
+                  <div class='d-flex flex-column justify-content-center'>
+                    <div class='main_image border'>
+                      <img src='{$row['pic_url']}' id='main_product_image' width='100%'/>
+                    </div>
+
+                  </div>
+                </div>
+                <div class='col-md-6'>
+                  <div class='p-3 right-side'>
+                    <div class='d-flex justify-content-between align-items-center'>
+                      <h3>{$name}</h3> <span class='heart'><i class='bx bx-heart'></i></span>
+                    </div>
+                    <div class='mt-2 pr-3 content'>
+                      <p>{$row['discription']}</p>
+                    </div>
+                    <h4>LKR {$row['price']}</h4>
+                    <div class='ratings d-flex flex-row align-items-center'>
+                      <div class='d-flex flex-row'> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bxs-star'></i> <i class='bx bx-star'></i> </div> <span>{$row['view_count']} views</span>
+                    </div>
+                    <div class='mt-5'> <span class='fw-bold'>Type</span>
+                      <p class='m-3'>{$row['type']}</p>
+                      <p class='text-muted'>{$row['post_date']}</p>
+                      <P class='text-danger'>Views ({$row['view_count']})</p>
+                    </div>
+                    <div class='buttons d-flex flex-row mt-5 gap-3'>
+                      <button class='btn btn-outline-dark'>Buy Now</button>
+                      <button class='btn btn-dark ml-3'>Add to Basket</button>
+                      
+                    </div>
+
+                  </div>
+                </div>
+                ";
+            }
           } else {
             echo "<p class='alert alert-warning text-center w-100'>No Items Found!<br>Please try again later</p>";
           }
