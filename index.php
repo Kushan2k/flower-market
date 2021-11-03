@@ -187,21 +187,22 @@ https://templatemo.com/tm-546-sixteen-clothing
         if ($res == TRUE) {
           if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
+              $itemID = (int)$row['id'] + 1254;
               if (($_COOKIE['uid'] - 999) != $row['user_id']) {
                 echo
                 "
                       <div class='col-md-4 col-12'>
                         <div class='product-item'>
-                          <a href='./php/item.php'><img src='./php/{$row['pic_url']}' alt=''></a>
+                          <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
-                            <a href='./php/item.php'>
+                            <a href='./php/item.php?item={$itemID}'>
                               <h4>{$row['name']}</h4>
                             </a>
-                            <h6>$25.75</h6>
+                            <h6>LKR {$row['price']}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
                             <button class='btn btn-outline-success mt-md-2'>Add To Basket</button>
                           </div>
                         </div>
@@ -212,16 +213,16 @@ https://templatemo.com/tm-546-sixteen-clothing
                 "
                       <div class='col-md-4 col-12'>
                         <div class='product-item'>
-                          <a href='./php/item.php'><img src='./php/{$row['pic_url']}' alt=''></a>
+                          <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
-                            <a href='./php/item.php'>
+                            <a href='./php/item.php?item={$itemID}'>
                               <h4>{$row['name']}</h4>
                             </a>
-                            <h6>$25.75</h6>
+                            <h6>LKR {$row['price']}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
                             
                           </div>
                         </div>
