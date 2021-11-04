@@ -19,7 +19,7 @@ if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-  <title>Sixteen Clothing HTML Template</title>
+  <title>Dreamweaver flowers - Home</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -52,11 +52,13 @@ https://templatemo.com/tm-546-sixteen-clothing
   <!-- ***** Preloader End ***** -->
 
   <!-- Header -->
-  <header class="">
+  <header class=" position-fixed">
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="index.php">
-          <h2>Sixteen <em>Clothing</em></h2>
+          <h2>Dreamweaver <em>flowers</em></h2>
+
+
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -116,24 +118,25 @@ https://templatemo.com/tm-546-sixteen-clothing
     <div class="owl-banner owl-carousel">
       <div class="banner-item-01">
         <div class="text-content">
-          <h4>Best Offer</h4>
-          <h2>New Arrivals On Sale</h2>
+          <h4>The Best Flower Market</h4>
+          <h2>New Arrivals/New Trends </h2>
         </div>
       </div>
       <div class="banner-item-02">
         <div class="text-content">
-          <h4>Flash Deals</h4>
-          <h2>Get your best products</h2>
+          <h4 style="color: white;">For Buyers & Sellers</h4>
+          <h2>Get Or Give What You Want</h2>
         </div>
       </div>
       <div class="banner-item-03">
         <div class="text-content">
-          <h4>Last Minute</h4>
-          <h2>Grab last minute deals</h2>
+          <h3 style="color: white;">Your Choice</h3>
+          <h2 class="chg-text" style="">Grabs you like for afortable price</h2>
         </div>
       </div>
     </div>
   </div>
+
   <!-- Banner Ends Here -->
   <div class=" container mt-3 search-box ">
     <div class="row ">
@@ -260,9 +263,9 @@ https://templatemo.com/tm-546-sixteen-clothing
       <div class="row">
         <div class="col-md-12">
           <div class="inner-content">
-            <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+            <p>Copyright &copy; Dreamweaverflowers Co., Ltd.
 
-              - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </p>
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ session_start();
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="index.php">
-          <h2>Sixteen <em>Clothing</em></h2>
+          <h2>Dreamweaver <em>flowers</em></h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -149,9 +149,10 @@ session_start();
             <label for="inlineFormCustomSelect">Catogory <span class="text-danger">*</span></label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type" required>
               <option selected disabled>Choose...</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
+              <option value="bouquet">Bouquet</option>
+              <option value="flower plant">Flower Plant</option>
+              <option value="flower vass">Flower Vass</option>
+              <option value="flower seeds">Flower Seeds</option>
             </select>
           </div>
           <div class="form-group">

@@ -82,7 +82,7 @@ if ($result == TRUE) {
             <nav class="navbar navbar-expand-lg">
                 <div class="container">
                     <a class="navbar-brand" href="index.php">
-                        <h2>Sixteen <em>Clothing</em></h2>
+                        <h2>Dreamweaver <em>flowers</em></h2>
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
@@ -238,9 +238,9 @@ if ($result == TRUE) {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="inner-content">
-                            <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+                            <p>Copyright &copy; Dreamweaverflowers Co., Ltd.
 
-                                - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+                            </p>
                         </div>
                     </div>
                 </div>

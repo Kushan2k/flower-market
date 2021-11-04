@@ -34,7 +34,7 @@ if (isset($_GET['view'])) {
   <meta name="author" content="">
   <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-  <title>Sixteen Clothing Products</title>
+  <title>Dreamweaver flowers - Product</title>
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -71,7 +71,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <nav class="navbar navbar-expand-lg">
       <div class="container">
         <a class="navbar-brand" href="index.php">
-          <h2>Sixteen <em>Clothing</em></h2>
+          <h2>Dreamweaver <em>flowers</em></h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -226,9 +226,9 @@ https://templatemo.com/tm-546-sixteen-clothing
       <div class="row">
         <div class="col-md-12">
           <div class="inner-content">
-            <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
+            <p>Copyright &copy; Dreamweaverflowers Co., Ltd.
 
-              - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            </p>
           </div>
         </div>
       </div>
