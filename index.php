@@ -3,6 +3,7 @@
 <?php
 
 include_once "./php/conn.php";
+
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   $login = true;
 } else {
@@ -191,6 +192,8 @@ https://templatemo.com/tm-546-sixteen-clothing
           if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
               $itemID = (int)$row['id'] + 1254;
+
+
               if (($_COOKIE['uid'] - 999) != $row['user_id']) {
                 echo
                 "

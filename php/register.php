@@ -1,7 +1,4 @@
 <?php
-if (isset($_SESSION)) {
-    session_start();
-}
 
 include_once "./conn.php";
 
@@ -18,6 +15,7 @@ if (isset($_POST['register'])) {
     if ($createPass != $confomaPass || empty($createPass) || empty($confomaPass)) {
         $_SESSION['error'] = "Password Don't Match";
         header("Location:./signup.php");
+        return;
     }
 
     if (!empty($name) && !empty($email) && !empty($city) && !empty($number) && !empty($address)) {
@@ -33,16 +31,18 @@ if (isset($_POST['register'])) {
         if ($result == TRUE) {
             $_SESSION['success'] = "Acount Created!";
             header('Location:./loginform.php');
+            return;
         } else {
             $_SESSION['error'] = $conn->error;
             header('Location:./signup.php');
+            return;
         }
     }
 }
 
 if (isset($_POST['login'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = htmlentities($_POST['email']);
+    $password = htmlentities($_POST['password']);
 
     if (!empty($email) && !empty($password)) {
         $sql = "SELECT password,id FROM user WHERE email=" . "'" . $email . "'";
@@ -65,6 +65,7 @@ if (isset($_POST['login'])) {
                     setcookie('u_email', $email, time() + 60 * 60 * 24 * 10, '/', '', $secure = true);
 
                     header('Location:../index.php');
+                    return;
                 } else {
                     echo 'dfsf';
                 }
@@ -76,5 +77,6 @@ if (isset($_POST['login'])) {
         }
     } else {
         header('Location:./login.php');
+        return;
     }
 }

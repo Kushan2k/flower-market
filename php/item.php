@@ -86,7 +86,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               <a class="nav-link" href="products.php">Our Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="php/products.php">Trending</a>
+              <a class="nav-link" href="products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="aboutus.php">About Us</a>
@@ -118,10 +118,10 @@ https://templatemo.com/tm-546-sixteen-clothing
           if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
             $name = ucwords($row['name']);
-
-            if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
-              echo
-              "
+            if (isset($_COOKIE['uid'])) {
+              if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
+                echo
+                "
                 <div class='col-md-6 border-end'>
                   <div class='d-flex flex-column justify-content-center'>
                     <div class='main_image border'>
@@ -155,6 +155,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                   </div>
                 </div>
                 ";
+              }
             } else {
               echo
               "
