@@ -12,6 +12,16 @@ if (isset($_POST['register'])) {
     $createPass = $_POST['c-password'];
     $confomaPass = $_POST['r-password'];
 
+    $_SESSION['sing-data'] = array(
+        'name' => $name,
+        'email' => $email,
+        'pass' => $createPass,
+        'compass' => $confomaPass,
+        'number' => $number,
+        'city' => $city,
+        'address' => $address
+    );
+
     if ($createPass != $confomaPass || empty($createPass) || empty($confomaPass)) {
         $_SESSION['error'] = "Password Don't Match";
         header("Location:./signup.php");
@@ -30,6 +40,7 @@ if (isset($_POST['register'])) {
         $result = $conn->query($sql);
         if ($result == TRUE) {
             $_SESSION['success'] = "Acount Created!";
+            $_SESSION['sing-data'] = null;
             header('Location:./loginform.php');
             return;
         } else {
@@ -37,6 +48,10 @@ if (isset($_POST['register'])) {
             header('Location:./signup.php');
             return;
         }
+    } else {
+        $_SESSION['error'] = 'Please fill all the feilds!';
+        header('Location:./singup.php');
+        return;
     }
 }
 
@@ -67,16 +82,24 @@ if (isset($_POST['login'])) {
                     header('Location:../index.php');
                     return;
                 } else {
-                    echo 'dfsf';
+                    $_SESSION['error'] = 'Passwords Don\'t match!<br>please try again';
+                    header("Location:./loginform.php");
                 }
             } else {
-                echo 'fdsf';
+                $_SESSION['error'] = 'No users found for !';
+                header('Location:./loginform.php');
+                return;
             }
         } else {
-            echo 'fsdfsdf';
+            $_SESSION['error'] = 'Error Login Please try again!';
+            header('Location:./loginform.php');
+            return;
         }
     } else {
-        header('Location:./login.php');
+        $_SESSION['error'] = 'Please fill up all the deatils!';
+        header('Location:./loginform.php');
         return;
     }
+} else {
+    header("Location:../index.php");
 }

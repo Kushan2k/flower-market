@@ -1,7 +1,15 @@
 <html lang="en">
 <?php
 session_start();
+
+$hasData = false;
+if (isset($_SESSION['sing-data'])) {
+  $hasData = true;
+  $data = $_SESSION['sing-data'];
+}
 ?>
+
+
 
 <head>
   <meta charset="UTF-8">
@@ -62,10 +70,10 @@ session_start();
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link " href="./products.php">Products</a>
+              <a class="nav-link " href="./products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./products.php">Trending</a>
+              <a class="nav-link" href="./products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./aboutus.php">About Us</a>
@@ -77,23 +85,12 @@ session_start();
             <li class="nav-item">
               <a class="nav-link active" href="./signup.php">Join</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link " href="./user.php">Me</a>
-            </li>
+
           </ul>
         </div>
       </div>
     </nav>
   </header>
-
-
-
-
-
-
-
-
-
 
 
   <div class="card bg-light">
@@ -103,23 +100,25 @@ session_start();
       <?php
       if (isset($_SESSION['error'])) {
         echo "<h5 class='alert alert-danger text-center error'>" . $_SESSION['error'] . "</h5>";
+
         $_SESSION['error'] = null;
       }
 
       ?>
 
-      <form action="./register.php" method="POST">
+      <form method="POST" id="sing-up-form" action="./register.php">
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
           </div>
-          <input class="form-control" placeholder="Full name" name="fullname" type="text" required>
+          <input class="form-control" placeholder="Full name" name="fullname" type="text" required value="<?= $hasData ? $data['name'] : ''; ?>">
         </div> <!-- form-group// -->
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
           </div>
-          <input name="email" class="form-control" placeholder="Email address" type="email" required>
+          <input name="email" class="form-control" placeholder="Email address" type="email" required value="<?= $hasData ? $data['email'] : ''; ?>">
+
         </div> <!-- form-group// -->
         <div class="form-group input-group">
           <div class="input-group-prepend">
@@ -129,20 +128,20 @@ session_start();
             <option selected="">+94</option>
 
           </select>
-          <input name="number" class="form-control" placeholder="Phone number" type="text" required>
+          <input name="number" class="form-control" placeholder="Phone number" type="text" required value="<?= $hasData ? $data['number'] : ''; ?>">
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
           </div>
-          <input class="form-control" name="city" placeholder="City" type="text" required>
+          <input class="form-control" name="city" placeholder="City" type="text" required value="<?= $hasData ? $data['city'] : ''; ?>">
         </div>
 
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-address-book"></i> </span>
           </div>
-          <input class="form-control" placeholder="Address" name="address" type="text" required>
+          <input class="form-control" placeholder="Address" name="address" type="text" required value="<?= $hasData ? $data['address'] : ''; ?>">
         </div>
 
         <!-- form-group// -->
@@ -152,13 +151,13 @@ session_start();
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control" placeholder="Create password" name="c-password" type="password" required>
+          <input class="form-control" placeholder="Create password" name="c-password" type="password" required value="<?= $hasData ? $data['pass'] : ''; ?>">
         </div> <!-- form-group// -->
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control" placeholder="Repeat password" name="r-password" type="password" required>
+          <input class="form-control" placeholder="Repeat password" name="r-password" type="password" required value="<?= $hasData ? $data['compass'] : ''; ?>">
         </div> <!-- form-group// -->
 
 
@@ -166,14 +165,15 @@ session_start();
 
 
         <div class="form-group">
-          <button type="submit" class="btn btn-primary btn-block" name="register"> Create Account </button>
+          <button type="submit" class="btn btn-dark btn-block" name="register"> Create Account </button>
+
         </div> <!-- form-group// -->
         <p class="text-center">Have an account? <a href="./loginform.php">Log In</a> </p>
       </form>
     </article>
   </div> <!-- card.// -->
 
-  </div>
+
   <!--container end.//-->
 
   <br><br>

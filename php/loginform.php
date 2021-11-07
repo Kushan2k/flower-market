@@ -3,6 +3,10 @@
 if (!isset($_SESSION)) {
   session_start();
 }
+
+if (isset($_COOKIE['uid']) && isset($_COOKIE['u-email'])) {
+  header('Location:../index.php');
+}
 ?>
 
 <head>
@@ -76,15 +80,11 @@ if (!isset($_SESSION)) {
               <a class="nav-link " href="./contact.php">Contact Us</a>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item active">
               <a class="nav-link active" href="./signup.php">Join</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link " href="./user.php">Me</a>
-            </li>
+
+
           </ul>
         </div>
       </div>
@@ -110,6 +110,10 @@ if (!isset($_SESSION)) {
               echo "<p class='alert alert-success text-center error'>" . $_SESSION['success'] . "</p>";
               $_SESSION['success'] = null;
             }
+            if (isset($_SESSION['error'])) {
+              echo "<p class='alert alert-danger text-center error error'>" . $_SESSION['error'] . "</p>";
+              $_SESSION['error'] = null;
+            }
 
             ?>
 
@@ -122,6 +126,7 @@ if (!isset($_SESSION)) {
                   </span>
                 </div>
                 <input name="email" class="form-control" placeholder="Email address" type="email" />
+
               </div>
               <!-- form-group// -->
 
@@ -134,10 +139,12 @@ if (!isset($_SESSION)) {
                   </span>
                 </div>
                 <input name="password" class="form-control" placeholder="Password" type="password" />
+
+
               </div>
 
               <div class="form-group">
-                <button type="submit" name="login" class="btn btn-primary btn-block">
+                <button type="submit" name="login" class="btn btn-dark btn-block">
                   Sign In
                 </button>
               </div>

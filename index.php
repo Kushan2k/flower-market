@@ -74,7 +74,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="php/products.php?view=all">Products</a>
+              <a class="nav-link" href="php/products.php?view=all">Our Products</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="php/products.php?view=trending">Trending</a>
@@ -113,6 +113,8 @@ https://templatemo.com/tm-546-sixteen-clothing
     </nav>
   </header>
 
+
+
   <!-- Page Content -->
   <!-- Banner Starts Here -->
   <div class="banner header-text">
@@ -137,6 +139,14 @@ https://templatemo.com/tm-546-sixteen-clothing
       </div>
     </div>
   </div>
+  <?php
+  if (isset($_SESSION['db-error'])) {
+    echo "
+    <div class='container'>
+    <p class='alert alert-danger text-center'>{$_SESSION['db-error']}</p></div>";
+    unset($_SESSION['db-error']);
+  }
+  ?>
 
   <!-- Banner Ends Here -->
   <div class=" container mt-3 search-box ">
@@ -178,7 +188,7 @@ https://templatemo.com/tm-546-sixteen-clothing
 
   <div class="latest-products">
     <div class="container">
-      <div class="row">
+      <div class="row grid">
         <div class="col-md-12">
           <div class="section-heading">
             <h2>Latest Products</h2>
@@ -186,18 +196,18 @@ https://templatemo.com/tm-546-sixteen-clothing
           </div>
         </div>
         <?php
-        $sql = "SELECT id,name,discription,price,pic_url,user_id FROM item ORDER BY post_date LIMIT 20";
+        $sql = "SELECT id,name,discription,price,pic_url,user_id FROM item ORDER BY post_date DESC LIMIT 20";
         $res = $conn->query($sql);
         if ($res == TRUE) {
           if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
               $itemID = (int)$row['id'] + 1254;
 
-
-              if (($_COOKIE['uid'] - 999) != $row['user_id']) {
-                echo
-                "
-                      <div class='col-md-4 col-12'>
+              if (isset($_COOKIE['uid'])) {
+                if (($_COOKIE['uid'] - 999) != $row['user_id']) {
+                  echo
+                  "
+                      <div class='col-md-4 col-12 all des'>
                         <div class='product-item'>
                           <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
@@ -208,16 +218,16 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
-                            <button class='btn btn-outline-success mt-md-2'>Add To Basket</button>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
+                            <button class='btn btn-outline-dark mt-md-2'>Add To Basket</button>
                           </div>
                         </div>
                       </div>
                   ";
-              } else {
-                echo
-                "
-                      <div class='col-md-4 col-12'>
+                } else {
+                  echo
+                  "
+                      <div class='col-md-4 col-12 all des'>
                         <div class='product-item'>
                           <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
@@ -228,7 +238,28 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
+                            
+                          </div>
+                        </div>
+                      </div>
+                  ";
+                }
+              } else {
+                echo
+                "
+                      <div class='col-md-4 col-12 all des'>
+                        <div class='product-item'>
+                          <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./php/item.php?item={$itemID}'>
+                              <h4>{$row['name']}</h4>
+                            </a>
+                            <h6>LKR {$row['price']}</h6>
+                            <p>{$row['discription']}.</p>
+                          </div>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
+                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
                             
                           </div>
                         </div>

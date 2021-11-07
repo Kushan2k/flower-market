@@ -6,12 +6,21 @@ include_once "./conn.php";
 
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
     $login = true;
+} else if (isset($_GET['owner_id'])) {
+    $_SESSION['go-to'] = $_SERVER['PHP_SELF'];
+    header("Location:./error.php?error=login-error");
 } else {
     $login = false;
     header("Location:../index.php");
 }
-
-$id = (int)$_GET['user_id'] - 999;
+$id = 0;
+$own = false;
+if (isset($_GET['user_id'])) {
+    $id = (int)$_GET['user_id'] - 999;
+    $own = true;
+} else if (isset($_GET['owner_id'])) {
+    $id = (int)$_GET['owner_id'] - 1289;
+}
 
 $sql = "SELECT name,email,city,address,mobile FROM user WHERE id=" . $id;
 
@@ -140,8 +149,10 @@ if ($result == TRUE) {
             <?php
             if (isset($_SESSION['message-s'])) {
                 echo '<p class="alert alert-success text-center error">' . $_SESSION['message-s'] . '</p>';
+                $_SESSION['message-s'] = null;
             } else if (isset($_SESSION['upload-errpr'])) {
                 echo '<p class="alert alert-danger text-center error">' . $_SESSION['upload-errpr'] . '</p>';
+                $_SESSION['upload-error'] = null;
             }
             ?>
             <div class="row">
@@ -174,27 +185,31 @@ if ($result == TRUE) {
                 </div>
 
                 <div class="col-12 col-lg-7 mt-3">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <a class="btn btn-outline-success" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add">Add Item</a>
-                            <button class="btn btn-outline-warning">Edit Profile</button>
+                    <?php if ($own) { ?>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <a class="btn btn-outline-success" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add">Add Item</a>
+                                <button class="btn btn-outline-warning">Edit Profile</button>
+                            </div>
                         </div>
-                    </div>
+                    <?php } ?>
+
                     <h1 class="alert alert-danger text-center">Item Details of user</h1>
                     <div class="row ">
 
                         <?php
-                        $id = $_GET['user_id'] - 999;
-                        $sql = "SELECT id,name,discription,price,view_count,pic_url,user_id FROM item WHERE user_id={$id} ORDER BY post_date LIMIT 20";
+
+                        $sql = "SELECT id,name,discription,price,view_count,pic_url,user_id FROM item WHERE user_id={$id} ORDER BY post_date DESC";
                         $res = $conn->query($sql);
                         if ($res == TRUE) {
                             if ($res->num_rows > 0) {
                                 while ($row = $res->fetch_assoc()) {
+                                    $itemid = (int)$row['id'] + 1254;
                                     echo
                                     "
                                         <div class='col-md-6 col-12'>
                                             <div class='product-item'>
-                                            <a href='./php/item.php'><img src='./{$row['pic_url']}' alt=''></a>
+                                            <a href='./item.php'><img src='./{$row['pic_url']}' alt=''></a>
                                             <div class='down-content'>
                                                 <a href='./php/item.php'>
                                                 <h4>{$row['name']}</h4>
@@ -203,14 +218,14 @@ if ($result == TRUE) {
                                                 <p>{$row['discription']}.</p>
                                             </div>
                                             <div class='mb-4 ml-3'>
-                                                <a href='./php/item.php?item={$row['id']}' class='btn btn-outline-success'>Go To Product</a>
+                                                <a href='./item.php?item={$itemid}' class='btn btn-outline-success'>Go To Product</a>
                                             </div>
                                             </div>
                                         </div>
               ";
                                 }
                             } else {
-                                echo "<p class='alert alert-warning text-center'>No Items Yet!<br>Keep Wait</p>";
+                                echo "<p class='alert alert-warning text-center w-100'>No Items Yet!<br>Keep Wait</p>";
                             }
                         } else {
                             echo "<p class='alert alert-danger text-center w-100'>Connecting error! <br>Please contact us..<a href='./php/contact.php'>in Here</a></p>";

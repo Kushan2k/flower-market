@@ -16,7 +16,7 @@ if (isset($_GET['view'])) {
       $sql = "SELECT name,id,price,view_count,discription,user_id,pic_url FROM item ORDER BY view_count DESC";
       break;
     case 'all':
-      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item ORDER BY post_date";
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item ORDER BY post_date DESC";
       break;
   }
 } else {
@@ -157,10 +157,10 @@ https://templatemo.com/tm-546-sixteen-clothing
                   while ($row = $re->fetch_assoc()) {
                     $itemID = (int)$row['id'] + 1254;
                     $name = ucwords($row['name']);
-
-                    if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
-                      echo
-                      "
+                    if (isset($_COOKIE['uid'])) {
+                      if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
+                        echo
+                        "
                       <div class='col-12 col-lg-4 col-md-4 all des'>
                         <div class='product-item'>
                           <a href='./item.php?item={$itemID}'><img src='{$row['pic_url']}' alt=''></a>
@@ -174,12 +174,35 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <span>Views ({$row['view_count']})</span>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
+                            <a href='./item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
                             
                           </div>
                         </div>
                       </div>
                       ";
+                      } else {
+                        echo
+                        "
+                      <div class='col-12 col-lg-4 col-md-4 all des'>
+                        <div class='product-item'>
+                          <a href='./item.php?item={$itemID}'><img src='{$row['pic_url']}' alt=''></a>
+                          <div class='down-content'>
+                            <a href='./item.php?item={$itemID}'>
+                              <h4>{$name}</h4>
+                            </a>
+                            <h6>LKR {$row['price']}</h6>
+                            <p>{$row['discription']}.</p>
+
+                            <span>Views ({$row['view_count']})</span>
+                          </div>
+                          <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
+                            <a href='./item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
+                            <button class='btn btn-outline-dark mt-md-2'>Add To Basket</button>
+                          </div>
+                        </div>
+                      </div>
+                      ";
+                      }
                     } else {
                       echo
                       "
@@ -196,8 +219,8 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <span>Views ({$row['view_count']})</span>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
-                            <a href='./php/item.php?item={$itemID}' class='btn btn-outline-success'>Go To Product</a>
-                            <button class='btn btn-outline-success mt-md-2'>Add To Basket</button>
+                            <a href='./item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
+                            
                           </div>
                         </div>
                       </div>
