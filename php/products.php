@@ -19,6 +19,28 @@ if (isset($_GET['view'])) {
       $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item ORDER BY post_date DESC";
       break;
   }
+} else if (isset($_GET['q']) && isset($_GET['type'])) {
+  switch ($_GET['type']) {
+    case 'name':
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item
+          WHERE name LIKE '%{$_GET['q']}%' ORDER BY post_date DESC
+          ";
+      break;
+    case 'location':
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item
+          WHERE location LIKE '%{$_GET['q']}%' ORDER BY post_date DESC
+          ";
+      break;
+    case 'price':
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item
+          WHERE price<= {$_GET['q']} ORDER BY post_date DESC
+          ";
+      break;
+    case 'type':
+      $sql = "SELECT name,id,price,view_count,discription,pic_url,user_id FROM item
+          WHERE type LIKE '%{$_GET['q']}%' ORDER BY post_date DESC";
+      break;
+  }
 } else {
   header('Location:../index.php');
 }
@@ -152,6 +174,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               <?php
 
               $re = $conn->query($sql);
+
               if ($re == TRUE) {
                 if ($re->num_rows > 0) {
                   while ($row = $re->fetch_assoc()) {
@@ -227,7 +250,19 @@ https://templatemo.com/tm-546-sixteen-clothing
                       ";
                     }
                   }
+                } else {
+                  echo
+                  "
+                  <p class='alert alert-warning text-center mt-5 w-100'>No Results Found!</p>
+                  
+                  ";
                 }
+              } else {
+                echo
+                "
+                  <p class='alert alert-warning text-center mt-5 w-100'>error fetching result<br> please try again later!</p>
+                  
+                  ";
               }
 
 

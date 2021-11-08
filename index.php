@@ -158,11 +158,11 @@ https://templatemo.com/tm-546-sixteen-clothing
             <input type="text" placeholder="Search Here!" class=" form-control" name="q">
             <h4 class="text-center mx-2">By</h4>
             <select class=" form-control custom-select" name="type">
-              <option value="Name">Name</option>
-              <option value="Name">Location</option>
-              <option value="Name">Color</option>
-              <option value="Name">Price</option>
-              <option value="Name">
+              <option value="name">Name</option>
+              <option value="location">Location</option>
+
+              <option value="price">Price</option>
+              <option value="type">
                 Type
               </option>
             </select>
