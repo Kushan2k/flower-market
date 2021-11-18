@@ -7,15 +7,25 @@ if (isset($_GET['addtocart'])) {
         $itemid = (int)$_GET['itemid'] - 1254;
         if (checkcart($id, $itemid, $conn)) {
             addToCart($id, $itemid, $conn);
-            echo getCartCount($id, $conn);
+            echo true;
         } else {
             echo 'item already in cart';
         }
     } else {
         echo false;
     }
-} else {
-    echo false;
+}
+
+if (isset($_GET['rm-cart'])) {
+    $id = (int)$_COOKIE['uid'] - 999;
+    $itemid = (int)$_GET['id'];
+
+    if (removeFromCart($id, $itemid, $conn)) {
+
+        echo $itemid;
+    } else {
+        echo 'Removing item failed!';
+    }
 }
 
 
@@ -56,6 +66,17 @@ function checkcart($uid, $itemid, $conn)
         } else {
             return true;
         }
+    } else {
+        return false;
+    }
+}
+
+function removeFromCart($uid, $itemid, $conn)
+{
+    $sql = "DELETE FROM cart WHERE user_id={$uid} AND item_id={$itemid}";
+    $res = $conn->query($sql);
+    if ($res == TRUE) {
+        return true;
     } else {
         return false;
     }

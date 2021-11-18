@@ -1,4 +1,5 @@
 <?php
+include_once './conn.php';
 if (!isset($_COOKIE['uid']) && !isset($_COOKIE['u-email'])) {
     header("Location:../index.php");
 }
@@ -64,7 +65,49 @@ if (!isset($_GET['uid'])) {
                                 </thead>
                                 <tbody>
                                     <?php
+                                    $sql = "SELECT item_id FROM cart WHERE user_id={$uid}";
+                                    $res = $conn->query($sql);
+                                    $total = 0;
+                                    if ($res == TRUE) {
+                                        if ($res->num_rows > 0) {
+                                            while ($row = $res->fetch_assoc()) {
+                                                $itemid = $row['item_id'];
+                                                $sql = "SELECT id,name,price,pic_url,type FROM item WHERE id={$itemid}";
+                                                $result = $conn->query($sql);
+                                                if ($result == TRUE) {
+                                                    if ($result->num_rows > 0) {
+                                                        while ($itemrow = $result->fetch_assoc()) {
 
+                                                            $pice = number_format($itemrow["price"], 2, '.', ',');
+                                                            $total += (float)$itemrow['price'];
+                                                            echo
+                                                            "
+                                                            <tr class='item-row item-{$itemrow['id']}'>
+                                                                <th scope='row' class='border-0'>
+                                                                    <div class='p-2'>
+                                                                        <img src='{$itemrow["pic_url"]}' alt='' width='140' class='img-fluid rounded shadow-sm'>
+                                                                        <div class='ml-3 d-inline-block align-middle'>
+                                                                            <h5 class='mb-0'> <a href='#' class='text-dark d-inline-block align-middle'>{$itemrow["name"]}</a></h5><span class='text-muted font-weight-normal font-italic d-block'>Category: {$itemrow["type"]}</span>
+                                                                        </div>
+                                                                    </div>
+                                                                </th>
+                                                                <td class='border-0 align-middle'><strong>LKR {$pice}</strong></td>
+                                                                <td class='border-0 align-middle'><strong>3</strong></td>
+                                                                <td class='border-0 align-middle'>
+                                                                    <button class='del-btn border-0' data-item='{$itemrow['id']}'>
+                                                                            <i class='fa fa-trash text-danger' aria-hidden='true' style='transform: scale(1.6);' data-item='{$itemrow['id']}'>
+
+                                                                            </i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            ";
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
 
                                     ?>
 
@@ -77,32 +120,16 @@ if (!isset($_GET['uid'])) {
 
                 <div class="row py-5 p-4 bg-white rounded shadow-sm">
                     <div class="col-lg-6">
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Coupon code</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">If you have a coupon code, please enter it in the box below</p>
-                            <div class="input-group mb-4 border rounded-pill p-2">
-                                <input type="text" placeholder="Apply coupon" aria-describedby="button-addon3" class="form-control border-0">
-                                <div class="input-group-append border-0">
-                                    <button id="button-addon3" type="button" class="btn btn-dark px-4 rounded-pill"><i class="fa fa-gift mr-2"></i>Apply coupon</button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Instructions for seller</div>
-                        <div class="p-4">
-                            <p class="font-italic mb-4">If you have some information for the seller you can leave them in the box below</p>
-                            <textarea name="" cols="30" rows="2" class="form-control"></textarea>
-                        </div>
+
                     </div>
                     <div class="col-lg-6">
                         <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
                         <div class="p-4">
                             <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
                             <ul class="list-unstyled mb-4">
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>$390.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>$10.00</strong></li>
-                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>$0.00</strong></li>
+                                <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong><?= 'LKR ' . number_format($total, 2, '.', ',') ?></strong></li>
                                 <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
-                                    <h5 class="font-weight-bold">$400.00</h5>
+                                    <h5 class="font-weight-bold"><?= 'LKR ' . number_format($total, 2, '.', ',') ?></h5>
                                 </li>
                             </ul><a href="#" class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</a>
                         </div>
@@ -114,7 +141,37 @@ if (!isset($_GET['uid'])) {
     </div>
 
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const delBtns = document.querySelectorAll('.del-btn');
 
+            delBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // alert(e.target.dataset.item)
+                    try {
+                        const xhr = new XMLHttpRequest()
+
+                        xhr.onreadystatechange = function() {
+                            if (this.readyState == 4 && this.status == 200) {
+                                const delid = parseInt(this.responseText)
+                                let cartlist = document.querySelectorAll('.item-row')
+                                cartlist.forEach(item => {
+                                    if (item.classList.contains(`item-${delid}`)) {
+                                        item.remove()
+                                        window.location = ''
+                                    }
+                                })
+                            }
+                        }
+                        xhr.open('GET', `./addtocart.php?rm-cart=true&id=${e.target.dataset.item}`)
+                        xhr.send()
+                    } catch {
+                        alert('Can not process your request now!');
+                    }
+                })
+            })
+        })
+    </script>
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
