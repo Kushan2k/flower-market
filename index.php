@@ -95,7 +95,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               echo
               '
             <li class="nav-item">
-              <a class="nav-link" href="./php/signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+              <a class="nav-link" href="./php/cart.php?uid=' . $_COOKIE["uid"] . '"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
             </li>
             ';
             } else {
@@ -196,6 +196,7 @@ https://templatemo.com/tm-546-sixteen-clothing
           </div>
         </div>
         <?php
+        //sql query for geting data
         $sql = "SELECT id,name,discription,price,pic_url,user_id FROM item ORDER BY post_date DESC LIMIT 20";
         $res = $conn->query($sql);
         if ($res == TRUE) {
@@ -219,7 +220,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
-                            <button class='btn btn-outline-dark mt-md-2'>Add To Basket</button>
+                            <button class='btn btn-outline-dark mt-md-2 cart-btn' data-itemid='{$itemID}'>Add To Basket</button>
                           </div>
                         </div>
                       </div>
@@ -312,7 +313,7 @@ https://templatemo.com/tm-546-sixteen-clothing
   <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-  <!-- Additional Scripts -->
+  <!-- Additional javaScript files -->
   <script src="assets/js/custom.js"></script>
   <script src="assets/js/owl.js"></script>
   <script src="assets/js/slick.js"></script>
@@ -329,6 +330,28 @@ https://templatemo.com/tm-546-sixteen-clothing
         t.style.color = '#fff';
       }
     }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btns = document.querySelectorAll('.cart-btn');
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function(event) {
+          const xhr = new XMLHttpRequest()
+
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              alert(xhr.responseText);
+            }
+
+          }
+          xhr.open('GET', `./php/addtocart.php?addtocart=true&itemid=${event.target.dataset.itemid}`)
+          xhr.send()
+
+        })
+      })
+    })
   </script>
 
 

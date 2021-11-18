@@ -16,10 +16,10 @@ if ($re == TRUE) {
   if ($re->num_rows > 0) {
     $count = (int)$re->fetch_assoc()['view_count'];
     $count = $count + 1;
-    // $sql = "UPDATE item SET view_count={$count} WHERE id={$itemID}";
-    // if ($conn->query($sql) != TRUE) {
-    //   header("Location:../index.php");
-    // }
+    $sql = "UPDATE item SET view_count={$count} WHERE id={$itemID}";
+    if ($conn->query($sql) != TRUE) {
+      header("Location:../index.php");
+    }
   } else {
     header("Location:../index.php");
   }
