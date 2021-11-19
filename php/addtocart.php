@@ -19,6 +19,7 @@ if (isset($_GET['addtocart'])) {
 if (isset($_GET['rm-cart'])) {
     $id = (int)$_COOKIE['uid'] - 999;
     $itemid = (int)$_GET['id'];
+    // echo $itemid;
 
     if (removeFromCart($id, $itemid, $conn)) {
 

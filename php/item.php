@@ -107,7 +107,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               echo
               '
             <li class="nav-item">
-              <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+              <a class="nav-link" href="./cart.php?uid=' . $_COOKIE["uid"] . '"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
             </li>
             ';
             } else {
@@ -178,6 +178,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                 </div>
                 ";
               } else {
+                $itemid_with_1253 = $itemID + 1254;
                 echo
                 "
                 <div class='col-md-6 border-end'>
@@ -206,7 +207,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>
                       <button class='btn btn-outline-dark'>Buy Now</button>
-                      <button class='btn btn-dark ml-3'>Add to Basket</button>
+                      <button class='btn btn-dark ml-3 cart-btn ' data-itemid='{$itemid_with_1253}'>Add to Basket</button>
                       
                     </div>
 
@@ -279,6 +280,28 @@ https://templatemo.com/tm-546-sixteen-clothing
 
   <!-- Additional Scripts -->
   <script src="../assets/js/custom.js"></script>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.querySelector('.cart-btn');
+
+      btn.addEventListener('click', function(event) {
+        const xhr = new XMLHttpRequest()
+
+
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            alert(xhr.responseText);
+          }
+
+        }
+        xhr.open('GET', `./addtocart.php?addtocart=true&itemid=${event.target.dataset.itemid}`)
+        xhr.send()
+
+      })
+    })
+  </script>
 </body>
 
 </html>

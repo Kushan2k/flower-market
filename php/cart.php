@@ -91,7 +91,7 @@ if (!isset($_GET['uid'])) {
                                                                         </div>
                                                                     </div>
                                                                 </th>
-                                                                <td class='border-0 align-middle'><strong>LKR {$pice}</strong></td>
+                                                                <td class='border-0 align-middle '>LKR <strong class='price-{$itemrow['id']}' >{$pice}</strong></td>
                                                                 <td class='border-0 align-middle'><strong>3</strong></td>
                                                                 <td class='border-0 align-middle'>
                                                                     <button class='del-btn border-0' data-item='{$itemrow['id']}'>
@@ -157,6 +157,7 @@ if (!isset($_GET['uid'])) {
                                 let cartlist = document.querySelectorAll('.item-row')
                                 cartlist.forEach(item => {
                                     if (item.classList.contains(`item-${delid}`)) {
+
                                         item.remove()
                                         window.location = ''
                                     }
