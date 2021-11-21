@@ -387,6 +387,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                 document.querySelector('.text-msg').innerHTML = 'Item already in the cart'
                 document.querySelector('.cart-alert').classList.remove('alert-success')
                 document.querySelector('.cart-alert').classList.add('alert-danger')
+
               }
               document.querySelector('.popup-cart').classList.remove('d-none')
 

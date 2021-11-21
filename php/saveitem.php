@@ -60,3 +60,9 @@ if (isset($_POST['add-item'])) {
 
     // print_r($picturefile);
 }
+
+if (isset($_POST['update-item']) && isset($_POST['type'])) {
+    $newName = htmlentities($_POST['name']);
+
+    echo $newName;
+}

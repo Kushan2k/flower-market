@@ -69,12 +69,15 @@ if (!isset($_GET['uid'])) {
                                     $res = $conn->query($sql);
                                     $total = 0;
                                     if ($res == TRUE) {
+
                                         if ($res->num_rows > 0) {
                                             while ($row = $res->fetch_assoc()) {
                                                 $itemid = $row['item_id'];
                                                 $sql = "SELECT id,name,price,pic_url,type FROM item WHERE id={$itemid}";
                                                 $result = $conn->query($sql);
                                                 if ($result == TRUE) {
+
+                                                    // echo $result->num_rows;
                                                     if ($result->num_rows > 0) {
                                                         while ($itemrow = $result->fetch_assoc()) {
 
@@ -103,13 +106,43 @@ if (!isset($_GET['uid'])) {
                                                             </tr>
                                                             ";
                                                         }
+                                                    } else {
+                                                        echo "
+                                                        <tr  colspan='4' class='item-row'>
+                                                            <p class='alert alert-warning text-center'>Opps! Your cart is empty</p>
+
+                                                        </tr>
+                                                        ";
                                                     }
+                                                } else {
+                                                    echo "
+                                                    <tr  colspan='4' class='item-row'>
+                                                        <p class='alert alert-danger text-center'>sorry! can not view your cart now
+                                                        look for <a class='nav-link' href='./products.php?view=all'> Products</a>
+                                                        </p>
+                                                    </tr>
+                                                        ";
                                                 }
                                             }
+                                        } else {
+                                            echo "
+                                                <tr  colspan='4' class='item-row'>
+                                                    <p class='alert alert-warning text-center'>Opps! Your cart is empty look for <a class='nav-link' href='./products.php?view=all'> Products</a>
+                                                    </p>
+
+                                                </tr>
+                                                        ";
                                         }
+                                    } else {
+                                        echo "
+                                            <tr  colspan='4' class='item-row'>
+                                                <h5 class='alert alert-danger text-center'>sorry! can not view your cart now</h5>
+                                            </tr>
+                                                        ";
                                     }
 
                                     ?>
+
 
                                 </tbody>
                             </table>
