@@ -47,7 +47,7 @@ if ($result == TRUE) {
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>Sixteen Clothing HTML Template</title>
+    <title>Dreamweaver Flowers-Me</title>
 
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
@@ -127,7 +127,7 @@ if ($result == TRUE) {
                                 echo
                                 '
                             <li class="nav-item">
-                            <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+                            <a class="nav-link" href="./cart.php?uid=' . $_COOKIE['uid'] . '"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
                             </li>
                             ';
                             } else {
@@ -161,7 +161,7 @@ if ($result == TRUE) {
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
                         <img class="rounded-circle mt-5" width="150px" src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg" /><span class="font-weight-bold"><?php echo $row['name']; ?></span><span class="text-black-50"><?php echo $row['email']; ?></span><span> </span>
                     </div>
-                    <h1 class="alert alert-success text-center text-capitalize">Profile Details</h1>
+                    <h4 class="alert alert-dark text-center text-capitalize">Profile Details</h4>
                     <div class="col-md-12">
                         <label class="labels">Name</label><input type="text" class="form-control" readonly value="<?php echo $row['name']; ?>" />
                     </div>
@@ -188,13 +188,14 @@ if ($result == TRUE) {
                     <?php if ($own) { ?>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <a class="btn btn-outline-success" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add">Add Item</a>
-                                <button class="btn btn-outline-warning">Edit Profile</button>
+                                <a class="btn btn-outline-dark" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add Item</a>
+                                <button class="btn btn-outline-dark"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>Edit Profile</button>
+                                <a href="./dashboard.php?uid=<?= $_COOKIE['uid'] ?>" class="btn btn-outline-dark"><i class="fa fa-info-circle mr-2" aria-hidden="true"></i>Dashboard</a>
                             </div>
                         </div>
                     <?php } ?>
 
-                    <h1 class="alert alert-danger text-center">Item Details of user</h1>
+                    <h4 class="alert alert-dark text-center">Item Details of user</h4>
                     <div class="row ">
 
                         <?php
@@ -204,6 +205,7 @@ if ($result == TRUE) {
                         if ($res == TRUE) {
                             if ($res->num_rows > 0) {
                                 while ($row = $res->fetch_assoc()) {
+                                    $price = number_format((float)$row['price'], 2, '.', ',');
                                     $itemid = (int)$row['id'] + 1254;
                                     echo
                                     "
@@ -214,11 +216,11 @@ if ($result == TRUE) {
                                                 <a href='./php/item.php'>
                                                 <h4>{$row['name']}</h4>
                                                 </a>
-                                                <h6>$25.75</h6>
+                                                <h6>LKR {$price}</h6>
                                                 <p>{$row['discription']}.</p>
                                             </div>
                                             <div class='mb-4 ml-3'>
-                                                <a href='./item.php?item={$itemid}' class='btn btn-outline-success'>Go To Product</a>
+                                                <a href='./item.php?item={$itemid}' class='btn btn-outline-dark'>Go To Product</a>
                                             </div>
                                             </div>
                                         </div>

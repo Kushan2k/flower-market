@@ -36,16 +36,16 @@ if (!isset($_GET['edititem']) && !isset($_COOKIE['uid']) && !isset($_COOKIE['uem
         <div class="row">
             <div class="col-12 col-lg-10 mx-auto">
                 <?php
-                if (isset($_SESSION['file_error'])) {
-                    echo "<p class='alert alert-danger text-center error'>{$_SESSION['file_error']}</p>";
-                    $_SESSION['file_error'] = null;
+                if (isset($_SESSION['update-error'])) {
+                    echo "<p class='alert alert-danger text-center error'>{$_SESSION['update-error']}</p>";
+                    $_SESSION['update-error'] = null;
                 }
 
                 ?>
                 <form action="./saveitem.php" method="POST">
                     <div class="form-group">
                         <label for="formGroupExampleInput">Item Name<span class="text-danger">*</span></label>
-                        <input type="text" class="form-control" required name="name" value="<?= $name ?>" id="formGroupExampleInput" placeholder="Example input">
+                        <input type="text" class="form-control" name="name" value="<?= $name ?>" id="formGroupExampleInput" placeholder="Example input">
                         <small class="text-muted">80 Charactors only</small>
                     </div>
                     <div class="form-group">
@@ -68,11 +68,12 @@ if (!isset($_GET['edititem']) && !isset($_COOKIE['uid']) && !isset($_COOKIE['uem
                         <small class="text-muted">Item location</small>
                     </div>
                     <input type="hidden" name="type" value="update">
+                    <input type="hidden" name="itemid" value="<?= $itemid + 5678 ?>">
 
 
                     <div class="form-group mt-4">
-                        <input type="submit" class="btn btn-success" value="Update Now" name="update-item">
-                        <a class="btn btn-warning" href="<?= $_SERVER['HTTP_REFERER'] ?>">Not Now</a>
+                        <input type="submit" class="btn btn-outline-dark" value="Update Now" name="update-item">
+                        <a class="btn btn-outline-warning" href="<?= $_SERVER['HTTP_REFERER'] ?>">Not Now</a>
                     </div>
 
                 </form>
@@ -80,6 +81,17 @@ if (!isset($_GET['edititem']) && !isset($_COOKIE['uid']) && !isset($_COOKIE['uem
         </div>
     </div>
 
+    <script>
+        //removing the error if found
+        setTimeout(rmError, 2000);
+
+        function rmError() {
+            let error = document.querySelector('.error');
+            if (error) {
+                error.remove()
+            }
+        }
+    </script>
 
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

@@ -88,7 +88,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               echo
               '
             <li class="nav-item">
-              <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+              <a class="nav-link" href="./cart.php?uid=' . $_COOKIE['uid'] . '"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
             </li>
             ';
             } else {

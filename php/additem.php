@@ -171,8 +171,8 @@ session_start();
           </div>
 
           <div class="form-group mt-4">
-            <input type="submit" class="btn btn-success" value="List Now" name="add-item">
-            <a class="btn btn-warning" href="./user.php?user_id=<?php echo $_GET['user_id']; ?>">Not Now</a>
+            <input type="submit" class="btn btn-outline-dark" value="List Now" name="add-item">
+            <a class="btn btn-outline-warning" href="./user.php?user_id=<?php echo $_GET['user_id']; ?>">Not Now</a>
           </div>
 
         </form>

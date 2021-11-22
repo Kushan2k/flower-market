@@ -10,9 +10,11 @@ if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
 }
 
 $sql = '';
+$trending = false;
 if (isset($_GET['view'])) {
   switch ($_GET['view']) {
     case 'trending':
+      $trending = true;
       $sql = "SELECT name,id,price,view_count,discription,user_id,pic_url FROM item ORDER BY view_count DESC";
       break;
     case 'all':
@@ -129,7 +131,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               echo
               '
             <li class="nav-item">
-              <a class="nav-link" href="./signup.php"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
+              <a class="nav-link" href="./cart.php?uid=' . $_COOKIE['uid'] . '"><i class="fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);"></i></a>
             </li>
             ';
             } else {
@@ -169,7 +171,18 @@ https://templatemo.com/tm-546-sixteen-clothing
       <div class="row">
         <div class="col-md-12">
           <div class="filters-content">
-            <div class="row grid">
+            <?php
+
+            if ($trending) {
+              echo
+              '
+                <p class="text-center text-danger">Trending Items</p>
+                ';
+            }
+
+            ?>
+            <div class="row grid mt-3">
+
 
               <?php
 

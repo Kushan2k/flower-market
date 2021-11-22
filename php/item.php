@@ -128,6 +128,17 @@ https://templatemo.com/tm-546-sixteen-clothing
 
   <div class="container mt-5 mb-5">
     <div class="card">
+      <?php
+      if (isset($_SESSION['update-error'])) {
+        echo "<p class='alert alert-danger text-center error'>{$_SESSION['update-error']}</p>";
+        $_SESSION['update-error'] = null;
+      }
+      if (isset($_SESSION['update-success'])) {
+        echo "<p class='alert alert-success text-center error'>{$_SESSION['update-success']}</p>";
+        $_SESSION['update-success'] = null;
+      }
+
+      ?>
       <div class="row g-0">
         <?php
 
@@ -140,6 +151,7 @@ https://templatemo.com/tm-546-sixteen-clothing
             $row = $result->fetch_assoc();
             $name = ucwords($row['name']);
             $owner = (int)$row['user_id'] + 1289;
+            $formatedprice = number_format((float)$row['price'], 2, '.', ',');
             if (isset($_COOKIE['uid'])) {
 
               if ((int)$row['user_id'] == ($_COOKIE['uid'] - 999)) {
@@ -162,7 +174,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                     <div class='mt-2 pr-3 content'>
                       <p>{$row['discription']}</p>
                     </div>
-                    <h4>LKR {$row['price']}</h4>
+                    <h4>LKR {$formatedprice}</h4>
                     
                     
                     <div class='mt-5'> <span class='fw-bold'>Type</span>
@@ -172,7 +184,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>
                       
-                      <a href='./edititem.php?for={$foredit}' class='btn btn-warning'>Edit</a>
+                      <a href='./edititem.php?for={$foredit}' class='btn btn-dark'><i class='fa fa-pencil-square mr-2' aria-hidden='true'></i>Edit</a>
                     </div>
 
                   </div>
@@ -198,7 +210,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                     <div class='mt-2 pr-3 content'>
                       <p>{$row['discription']}</p>
                     </div>
-                    <h4>LKR {$row['price']}</h4>
+                    <h4>LKR {$formatedprice}</h4>
                     
                     <div class='mt-5'> <span class='fw-bold'>Type</span>
                       <p class='m-3'>{$row['type']}</p>
@@ -235,7 +247,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                     <div class='mt-2 pr-3 content'>
                       <p>{$row['discription']}</p>
                     </div>
-                    <h4>LKR {$row['price']}</h4>
+                    <h4>LKR {$formatedprice}</h4>
                     
                     <div class='mt-5'> <span class='fw-bold'>Type</span>
                       <p class='m-3'>{$row['type']}</p>
@@ -347,7 +359,16 @@ https://templatemo.com/tm-546-sixteen-clothing
       closebtn.addEventListener('click', () => {
         document.querySelector('.popup-cart').classList.add('d-none')
       })
+
     })
+    setTimeout(rmError, 2000);
+
+    function rmError() {
+      let error = document.querySelector('.error');
+      if (error) {
+        error.remove()
+      }
+    }
   </script>
 </body>
 

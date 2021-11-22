@@ -167,7 +167,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               </option>
             </select>
 
-            <input type="submit" value="Search" class="btn btn-success ml-lg-5 mt-2 mt-lg-0">
+            <input type="submit" value="Search" class="btn btn-outline-dark ml-lg-5 mt-2 mt-lg-0">
           </div>
         </form>
 
@@ -203,6 +203,8 @@ https://templatemo.com/tm-546-sixteen-clothing
           if ($res->num_rows > 0) {
             while ($row = $res->fetch_assoc()) {
               $itemID = (int)$row['id'] + 1254;
+              $formatedprice = number_format((float)$row['price'], 2, '.', ',');
+
 
               if (isset($_COOKIE['uid'])) {
                 if (($_COOKIE['uid'] - 999) != $row['user_id']) {
@@ -215,7 +217,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <a href='./php/item.php?item={$itemID}'>
                               <h4>{$row['name']}</h4>
                             </a>
-                            <h6>LKR {$row['price']}</h6>
+                            <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
@@ -235,7 +237,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <a href='./php/item.php?item={$itemID}'>
                               <h4>{$row['name']}</h4>
                             </a>
-                            <h6>LKR {$row['price']}</h6>
+                            <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
@@ -256,7 +258,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <a href='./php/item.php?item={$itemID}'>
                               <h4>{$row['name']}</h4>
                             </a>
-                            <h6>LKR {$row['price']}</h6>
+                            <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>

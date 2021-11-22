@@ -62,7 +62,30 @@ if (isset($_POST['add-item'])) {
 }
 
 if (isset($_POST['update-item']) && isset($_POST['type'])) {
+    $itemid = (int)$_POST['itemid'] - 5678;
     $newName = htmlentities($_POST['name']);
+    $newPrice = htmlentities($_POST['itemprice']);
+    $newDiscription = htmlentities(trim($_POST['discription']));
+    $newLocation = htmlentities($_POST['location']);
 
-    echo $newName;
+    if (empty($newDiscription) && empty($newName) && empty($newPrice) && empty($newLocation)) {
+        $_SESSION['update-error'] = 'please fill out all the fields!';
+        header("Location:{$_SERVER['HTTP_REFERER']}");
+    }
+
+    $sql = $conn->prepare("UPDATE item SET name=? , price=? , location=? , discription=? WHERE id=?");
+    if (!$sql) {
+        $_SESSION['update-error'] = 'update failed!';
+        header("Location:{$_SERVER['HTTP_REFERER']}");
+    }
+    $sql->bind_param('sdssi', $newName, $newPrice, $newLocation, $newDiscription, $itemid);
+
+    if ($sql->execute()) {
+        $_SESSION['update-success'] = 'Update Successful!';
+        $item = (int)$_POST['itemid'] - 5678 + 1254;
+        header("Location:./item.php?item={$item}");
+    } else {
+        $_SESSION['update-error'] = 'update failed!';
+        header("Location:{$_SERVER['HTTP_REFERER']}");
+    }
 }

@@ -30,8 +30,15 @@ if (!isset($_GET['uid'])) {
 <!--Section: Block Content-->
 
 <body>
+    <style>
+        * {
+            margin: 0;
+            box-sizing: border-box;
+        }
+    </style>
 
-    <div class=" container bg-dark w-100" style="height: 50px;margin-bottom:70px">
+    <div class="bg-dark  mx-0 d-flex justify-content-start  align-items-center" style="height: 70px;margin-bottom:70px">
+        <a href="<?= $_SERVER['HTTP_REFERER'] ?>" class="ml-3 btn btn-outline-warning">Not Now</a>
 
     </div>
 
@@ -41,8 +48,8 @@ if (!isset($_GET['uid'])) {
 
         <div class="pb-5 ">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12  bg-white rounded shadow-sm mb-5">
+                <div class="row ">
+                    <div class="col-lg-12 mx-0 w-12 bg-white rounded shadow-sm mb-5">
 
                         <!-- Shopping cart table -->
                         <div class="table-responsive">
@@ -95,7 +102,12 @@ if (!isset($_GET['uid'])) {
                                                                     </div>
                                                                 </th>
                                                                 <td class='border-0 align-middle '>LKR <strong class='price-{$itemrow['id']}' >{$pice}</strong></td>
-                                                                <td class='border-0 align-middle'><strong>3</strong></td>
+                                                                <td class='border-0 align-middle'>
+                                                                    <select class='custom-select'>
+                                                                     <option seleted>1</option>
+                                                                     
+                                                                    </select>
+                                                                </td>
                                                                 <td class='border-0 align-middle'>
                                                                     <button class='del-btn border-0' data-item='{$itemrow['id']}'>
                                                                             <i class='fa fa-trash text-danger' aria-hidden='true' style='transform: scale(1.6);' data-item='{$itemrow['id']}'>
@@ -148,6 +160,8 @@ if (!isset($_GET['uid'])) {
                             </table>
                         </div>
                         <!-- End -->
+
+                        <h6 class="alert alert-dark text-center">Search More Products <a href="./products.php?view=all">Here</a></h6>
                     </div>
                 </div>
 
