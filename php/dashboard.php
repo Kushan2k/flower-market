@@ -18,8 +18,79 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
 
 <body>
 
-    <p class="alert alert-success">This is a Dashboard</p>
+    <div class="bg-dark header-bar">
+        Header
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h1 class=" text-center ">Dashboard</h1>
+            </div>
+            <div class="col-12 d-flex justify-content-around align-items-center">
+                <div class="row w-100 m-0 p-0">
+                    <div class="col-3 bg-success info-box">1</div>
+                    <div class="col-3 bg-dark info-box">2</div>
+                    <div class="col-3 bg-warning info-box">3</div>
+                    <div class="col-2 bg-primary info-box">4</div>
+                </div>
 
+            </div>
+
+            <div class="col-12 mt-5">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">First</th>
+                            <th scope="col">Last</th>
+                            <th scope="col" class=" d-none d-md-block">Handle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td class=" d-none d-md-block">@mdo</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td class=" d-none d-md-block">@fat</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td class=" d-none d-md-block">@twitter</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+        .header-bar {
+            min-height: 60px;
+            margin-bottom: 15px;
+        }
+
+        .info-box {
+            margin: 5px;
+            height: 60px;
+            border-radius: 15px;
+        }
+
+        .info-box:hover {
+            transform: scale(1.02);
+            cursor: pointer;
+            transition: 300ms linear;
+        }
+    </style>
 
     <script src="../vendor/jquery/jquery.min.js"></script>
     <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

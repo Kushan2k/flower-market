@@ -151,13 +151,13 @@ if (isset($_SESSION['sing-data'])) {
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control" placeholder="Create password" name="c-password" type="password" required value="<?= $hasData ? $data['pass'] : ''; ?>">
+          <input class="form-control pass" placeholder="Create password" name="c-password" type="password" required value="<?= $hasData ? $data['pass'] : ''; ?>">
         </div> <!-- form-group// -->
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control" placeholder="Repeat password" name="r-password" type="password" required value="<?= $hasData ? $data['compass'] : ''; ?>">
+          <input class="form-control compass" placeholder="Repeat password" name="r-password" type="password" required value="<?= $hasData ? $data['compass'] : ''; ?>">
         </div> <!-- form-group// -->
 
 
@@ -188,6 +188,32 @@ if (isset($_SESSION['sing-data'])) {
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(rmError, 2000);
+
+      var form = document.getElementById('sing-up-form')
+      form.addEventListener('submit', function(event) {
+
+        //get the number from number input filed
+        const number = event.target.number.value
+        //get the passwrod value from the password filed
+        const pass = document.querySelector('.pass').value
+
+        //get the comform password filed value
+        const comformpass = document.querySelector('.compass').value
+
+
+        if (number.length != 9) {
+          alert('Number can only contain 9 digits')
+          event.preventDefault()
+        }
+
+        if (pass != comformpass) {
+          alert('Password should match!')
+          event.preventDefault()
+        }
+
+      })
+
+
     })
 
     function rmError() {
