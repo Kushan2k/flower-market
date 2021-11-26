@@ -128,7 +128,7 @@ if (isset($_SESSION['sing-data'])) {
             <option selected="">+94</option>
 
           </select>
-          <input name="number" class="form-control" placeholder="Phone number" type="text" required value="<?= $hasData ? $data['number'] : ''; ?>">
+          <input name="number" class="form-control num" placeholder="Phone number" type="text" required value="<?= $hasData ? $data['number'] : ''; ?>">
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
@@ -151,13 +151,13 @@ if (isset($_SESSION['sing-data'])) {
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control pass" placeholder="Create password" name="c-password" type="password" required value="<?= $hasData ? $data['pass'] : ''; ?>">
+          <input class="form-control pass er" placeholder="Create password" name="c-password" type="password" required value="<?= $hasData ? $data['pass'] : ''; ?>">
         </div> <!-- form-group// -->
         <div class="form-group input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input class="form-control compass" placeholder="Repeat password" name="r-password" type="password" required value="<?= $hasData ? $data['compass'] : ''; ?>">
+          <input class="form-control compass er" placeholder="Repeat password" name="r-password" type="password" required value="<?= $hasData ? $data['compass'] : ''; ?>">
         </div> <!-- form-group// -->
 
 
@@ -203,15 +203,26 @@ if (isset($_SESSION['sing-data'])) {
 
         if (number.length != 9) {
           alert('Number can only contain 9 digits')
+          var num = document.querySelector('.num')
+          num.classList.add('border-danger')
+          setTimeout(clear, 3000)
           event.preventDefault()
         }
 
         if (pass != comformpass) {
           alert('Password should match!')
+          var feilds = document.querySelectorAll('.er')
+          feilds.forEach(e => {
+            e.classList.add('border-danger')
+
+            setTimeout(clear, 3000)
+          })
           event.preventDefault()
         }
 
       })
+
+
 
 
     })
@@ -220,6 +231,15 @@ if (isset($_SESSION['sing-data'])) {
       let error = document.querySelector('.error');
       if (error) {
         error.remove()
+      }
+    }
+
+    function clear() {
+      var errors = document.querySelectorAll('.border-danger')
+      if (errors) {
+        errors.forEach(e => {
+          e.classList.remove('border-danger')
+        })
       }
     }
   </script>

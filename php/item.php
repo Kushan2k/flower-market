@@ -184,7 +184,11 @@ https://templatemo.com/tm-546-sixteen-clothing
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>
                       
-                      <a href='./edititem.php?for={$foredit}' class='btn btn-dark'><i class='fa fa-pencil-square mr-2' aria-hidden='true'></i>Edit</a>
+                      <a href='./edititem.php?for={$foredit}' class='btn btn-dark mr-3'><i class='fa fa-pencil-square mr-2' aria-hidden='true'></i>Edit</a>
+                      <form method='post' action='./saveitem.php' >
+                        <input type='hidden' name='del-id' value={$foredit}>
+                        <input type='submit' value='Delete' class='btn btn-danger' name='del-item' >
+                      </form>
                     </div>
 
                   </div>

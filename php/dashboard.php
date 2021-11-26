@@ -28,10 +28,10 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
             </div>
             <div class="col-12 d-flex justify-content-around align-items-center">
                 <div class="row w-100 m-0 p-0">
-                    <div class="col-3 bg-success info-box">1</div>
-                    <div class="col-3 bg-dark info-box">2</div>
-                    <div class="col-3 bg-warning info-box">3</div>
-                    <div class="col-2 bg-primary info-box">4</div>
+                    <div class="col-3 bg-success info-box d-flex justify-content-around align-items-center">Total Items</div>
+                    <div class="col-3  bg-info info-box d-flex justify-content-around align-items-center">Total Value</div>
+                    <div class="col-3 bg-warning info-box d-flex justify-content-around align-items-center">Total Views</div>
+                    <div class="col-2 bg-primary info-box d-flex justify-content-around align-items-center">4</div>
                 </div>
 
             </div>
@@ -41,9 +41,9 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">First</th>
-                            <th scope="col">Last</th>
-                            <th scope="col" class=" d-none d-md-block">Handle</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Views</th>
+                            <th scope="col" class=" d-none d-md-block">Options</th>
                         </tr>
                     </thead>
                     <tbody>

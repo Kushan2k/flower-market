@@ -86,3 +86,22 @@ if (isset($_POST['update-item']) && isset($_POST['type'])) {
         header("Location:{$_SERVER['HTTP_REFERER']}");
     }
 }
+
+if (isset($_POST['del-item'])) {
+    //get the item id from form and substract 5678 from it to get original id
+    $itemid = (int)$_POST['del-id'] - 5678;
+
+
+    //make sql query from delete the item
+    $sql = $conn->prepare("DELETE FROM item WHERE id=?");
+    // add item id to the sql query
+    $sql->bind_param('i', $itemid);
+
+    //run the sql query and check if successfull or not
+    if ($sql->execute()) {
+        //sending user back to home page /index
+        header("Location:../index.php");
+    } else {
+        header("Location:../index,php");
+    }
+}
