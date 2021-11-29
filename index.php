@@ -142,8 +142,8 @@ https://templatemo.com/tm-546-sixteen-clothing
   <?php
   if (isset($_SESSION['db-error'])) {
     echo "
-    <div class='container'>
-    <p class='alert alert-danger text-center'>{$_SESSION['db-error']}</p></div>";
+    <div class='container mt-3'>
+    <p class='alert alert-danger text-center error'>{$_SESSION['db-error']}</p></div>";
     unset($_SESSION['db-error']);
   }
   ?>
@@ -401,6 +401,13 @@ https://templatemo.com/tm-546-sixteen-clothing
 
         })
       })
+
+      setTimeout(() => {
+        var error = document.querySelector('.error');
+        if (error) {
+          error.remove()
+        }
+      }, 3000)
     })
   </script>
 

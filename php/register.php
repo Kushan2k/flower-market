@@ -103,3 +103,30 @@ if (isset($_POST['login'])) {
 } else {
     header("Location:../index.php");
 }
+
+if (isset($_POST['logoutbtn'])) {
+    if (isset($_COOKIE['uid']) && isset($_COOKIE['u_email'])) {
+        setcookie('uid', null, time() + 60, '/');
+        setcookie('u_email', null, time() + 60, '/');
+        header("Location:../index.php");
+    }
+}
+
+if (isset($_POST['update-user'])) {
+    $name = htmlentities($_POST['newname']);
+    $email = htmlentities($_POST['newemail']);
+    $address = htmlentities($_POST['newaddress']);
+    $mobile = htmlentities($_POST['number']);
+    $city = htmlentities($_POST['city']);
+    $userid = (int)$_COOKIE['uid'] - 999;
+
+    $sql = $conn->prepare("UPDATE user SET name=? , email=? , mobile=? , address=? , city=? WHERE id=?");
+    $sql->bind_param('sssssi', $name, $email, $mobile, $address, $city, $userid);
+    if ($sql->execute()) {
+        $_SESSION['message-s'] = 'Profile Updated!';
+        header("Location:./user.php?user_id={$_COOKIE['uid']}");
+    } else {
+        $_SESSION['upload-error'] = 'Profile Update Failed!';
+        header("Location:./user.php?user_id={$_COOKIE['uid']}");
+    }
+}

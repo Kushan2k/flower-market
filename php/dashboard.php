@@ -1,7 +1,21 @@
 <?php
 
+include_once './conn.php';
 if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
     header("Location:{$_SERVER['HTTP_REFERER']}");
+}
+
+if (!isset($_GET['uid'])) {
+    header('Location:../index.php');
+}
+$userid = (int)$_GET['uid'] - 999;
+
+$sql = "SELECT COUNT(id) as c,SUM(price) as s,SUM(view_count) as vc FROM item WHERE user_id={$userid}";
+
+$result = $conn->query($sql);
+if ($result == TRUE) {
+    $row = $result->fetch_assoc();
+    $totalprice = number_format($row['s'], 2, '.', ',');
 }
 
 ?>
@@ -18,8 +32,8 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
 
 <body>
 
-    <div class="bg-dark header-bar">
-        Header
+    <div class="bg-dark header-bar d-flex align-items-center">
+        <a class="btn btn-outline-light ml-3" href="<?= $_SERVER['HTTP_REFERER'] ?>">Back</a>
     </div>
     <div class="container">
         <div class="row">
@@ -28,9 +42,17 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
             </div>
             <div class="col-12 d-flex justify-content-around align-items-center">
                 <div class="row w-100 m-0 p-0">
-                    <div class="col-3 bg-success info-box d-flex justify-content-around align-items-center">Total Items</div>
-                    <div class="col-3  bg-info info-box d-flex justify-content-around align-items-center">Total Value</div>
-                    <div class="col-3 bg-warning info-box d-flex justify-content-around align-items-center">Total Views</div>
+                    <div class="col-3 bg-success info-box d-flex justify-content-around align-items-center">
+                        Item Count:-
+                        <?= $row['c'] ?>
+                    </div>
+                    <div class="col-3  bg-info info-box d-flex justify-content-around align-items-center">
+                        Total Price:- Rs
+                        <?= $totalprice ?>
+                    </div>
+                    <div class="col-3 bg-warning info-box d-flex justify-content-around align-items-center">
+                        Total Views:-
+                        <?= $row['vc'] ?></div>
                     <div class="col-2 bg-primary info-box d-flex justify-content-around align-items-center">4</div>
                 </div>
 
@@ -43,28 +65,38 @@ if (!isset($_COOKIE['uid']) && !isset($_COOKIE['uemail'])) {
                             <th scope="col">#</th>
                             <th scope="col">Name</th>
                             <th scope="col">Views</th>
-                            <th scope="col" class=" d-none d-md-block">Options</th>
+                            <th scope="col" class=" d-none d-md-block">Price</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td class=" d-none d-md-block">@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td class=" d-none d-md-block">@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td>Larry</td>
-                            <td>the Bird</td>
-                            <td class=" d-none d-md-block">@twitter</td>
-                        </tr>
+                        <?php
+                        $sql = "SELECT name,price,view_count FROM item WHERE user_id={$userid}";
+                        $res = $conn->query($sql);
+                        if ($res == TRUE) {
+                            if ($res->num_rows > 0) {
+                                $count = 1;
+                                while ($item = $res->fetch_assoc()) {
+                                    $price = number_format($item['price'], 2, '.', ',');
+                                    $name = ucfirst($item['name']);
+
+
+                                    echo
+                                    "
+                                    <tr>
+                                            <th scope='row'>{$count}</th>
+                                            <td>{$name}</td>
+                                            <td>{$item['view_count']}</td>
+                                            <td class=' d-none d-md-block'>Rs {$price}</td>
+                                    </tr>
+                                    ";
+                                    $count++;
+                                }
+                            }
+                        }
+
+
+                        ?>
+
                     </tbody>
                 </table>
             </div>

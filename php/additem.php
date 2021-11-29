@@ -1,14 +1,22 @@
 <html lang="en">
 <?php
+include_once './conn.php';
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   $login = true;
+  $uid = (int)$_GET['user_id'] - 999;
+  $sql = "SELECT name FROM user WHERE id={$uid}";
+  if ($conn->query($sql) == TRUE) {
+    if (!$conn->query($sql)->num_rows > 0) {
+      $_SESSION['db-error'] = 'No Users Found!';
+      header('Location:../index.php');
+    }
+  }
 } else {
   $login = false;
   header("Location:../index.php");
 }
 
 
-session_start();
 
 
 

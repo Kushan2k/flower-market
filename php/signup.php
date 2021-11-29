@@ -200,7 +200,7 @@ if (isset($_SESSION['sing-data'])) {
         //get the comform password filed value
         const comformpass = document.querySelector('.compass').value
 
-
+        //checking the number for 9 digits
         if (number.length != 9) {
           alert('Number can only contain 9 digits')
           var num = document.querySelector('.num')
@@ -209,6 +209,7 @@ if (isset($_SESSION['sing-data'])) {
           event.preventDefault()
         }
 
+        //checking if the passwords are match
         if (pass != comformpass) {
           alert('Password should match!')
           var feilds = document.querySelectorAll('.er')
@@ -234,6 +235,7 @@ if (isset($_SESSION['sing-data'])) {
       }
     }
 
+    //removing error marks from the web page
     function clear() {
       var errors = document.querySelectorAll('.border-danger')
       if (errors) {

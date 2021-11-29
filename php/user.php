@@ -29,11 +29,14 @@ if ($result == TRUE) {
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
     } else {
-        echo 'no result';
+        $_SESSION['db-error'] = 'No users Found!';
+        header("Location:../index.php");
     }
 } else {
-    echo 'no profile';
+    $_SESSION['db-error'] = 'Error Connecting to the database!';
+    header("Location:../index.php");
 }
+
 
 
 
@@ -189,8 +192,12 @@ if ($result == TRUE) {
                         <div class="row mb-3">
                             <div class="col-12">
                                 <a class="btn btn-outline-dark" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add Item</a>
-                                <button class="btn btn-outline-dark"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>Edit Profile</button>
+                                <a class="btn btn-outline-dark" href="./edituser.php?uid=<?= $_COOKIE['uid'] ?>"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>Edit Profile</a>
                                 <a href="./dashboard.php?uid=<?= $_COOKIE['uid'] ?>" class="btn btn-outline-dark"><i class="fa fa-info-circle mr-2" aria-hidden="true"></i>Dashboard</a>
+                                <form action="./register.php" method="POST" class="mt-3">
+                                    <input type="hidden" name="userid" value="<?= $_COOKIE['uid'] ?>">
+                                    <input type="submit" value="Log Out" class="btn btn-outline-warning" name="logoutbtn">
+                                </form>
                             </div>
                         </div>
                     <?php } ?>
