@@ -12,6 +12,7 @@ if (isset($_POST['add-item'])) {
     $picturefile = $_FILES['itempicture'];
     $filename = $picturefile['name'];
     $filesize = $picturefile['size'];
+
     // echo $filename;
 
     $allowFileTypes = array('jpeg', 'jpg', 'png');

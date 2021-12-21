@@ -178,6 +178,7 @@ if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
             </div>
           </div>
 
+
           <div class="form-group mt-4">
             <input type="submit" class="btn btn-outline-dark" value="List Now" name="add-item">
             <a class="btn btn-outline-warning" href="./user.php?user_id=<?php echo $_GET['user_id']; ?>">Not Now</a>
@@ -206,6 +207,19 @@ if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       setTimeout(rmError, 2000);
+
+      const qtys = document.querySelectorAll('.qty')
+      qtys.forEach(qty => {
+        qty.addEventListener('change', e => {
+          if (e.target.value === 'yes') {
+            document.querySelector('.qty-value').classList.remove('d-none')
+          } else {
+            document.querySelector('.qty-value').classList.add('d-none')
+
+          }
+        })
+      })
+
     })
 
     function rmError() {

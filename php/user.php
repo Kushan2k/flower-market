@@ -191,7 +191,7 @@ if ($result == TRUE) {
                     <?php if ($own) { ?>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <a class="btn btn-outline-dark" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add Item</a>
+                                <a class="btn btn-outline-dark" href="./additem.php?user_id=<?php echo $_COOKIE['uid']; ?>&action=add"><i class="fa fa-plus mr-1" aria-hidden="true"></i>Add Stock</a>
                                 <a class="btn btn-outline-dark" href="./edituser.php?uid=<?= $_COOKIE['uid'] ?>"><i class="fa fa-pencil mr-2" aria-hidden="true"></i>Edit Profile</a>
                                 <a href="./dashboard.php?uid=<?= $_COOKIE['uid'] ?>" class="btn btn-outline-dark"><i class="fa fa-info-circle mr-2" aria-hidden="true"></i>Dashboard</a>
                                 <form action="./register.php" method="POST" class="mt-3">
