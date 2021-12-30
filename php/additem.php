@@ -154,6 +154,11 @@ if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
             <small class="text-muted">Required</small>
           </div>
           <div class="form-group">
+            <label for="price">Stock<span class="text-danger">*</span></label>
+            <input type="number" class="form-control" id="stock" value="1" name="stock" required>
+            <small class="text-muted">How much of these do you want to sell</small>
+          </div>
+          <div class="form-group">
             <label for="inlineFormCustomSelect">Catogory <span class="text-danger">*</span></label>
             <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type" required>
               <option selected disabled>Choose...</option>

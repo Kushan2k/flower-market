@@ -7,11 +7,11 @@ if (!isset($_GET['edititem']) && !isset($_COOKIE['uid']) && !isset($_COOKIE['uem
     $itemid = $_GET['for'] - 5678;
 
     //geting relavent item details from the items table using the item id url parameter
-    $sql = $conn->prepare("SELECT name,price,discription,location FROM item WHERE id=?");
+    $sql = $conn->prepare("SELECT name,price,discription,location,stock FROM item WHERE id=?");
     //binding parameters to the query
     $sql->bind_param('i', $itemid);
     if ($sql->execute()) {
-        $sql->bind_result($name, $price, $dis, $location);
+        $sql->bind_result($name, $price, $dis, $location, $stock);
         $sql->fetch();
     } else {
         header("Location:{$_SERVER['HTTP_REFERER']}");
@@ -60,6 +60,11 @@ if (!isset($_GET['edititem']) && !isset($_COOKIE['uid']) && !isset($_COOKIE['uem
                         <label for="price">Price<span class="text-danger">*</span></label>
                         <input type="number" class="form-control" id="price" value="<?= $price ?>" placeholder="29.89" name="itemprice" required>
                         <small class="text-muted">Required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="price">In Stock<span class="text-danger">*</span></label>
+                        <input type="number" class="form-control" id="stock" value="<?= $stock ?>" name="stock" required>
+                        <small class="text-muted">In Stock</small>
                     </div>
 
                     <div class="form-group">

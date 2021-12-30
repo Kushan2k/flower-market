@@ -12,6 +12,7 @@ if (isset($_POST['add-item'])) {
     $picturefile = $_FILES['itempicture'];
     $filename = $picturefile['name'];
     $filesize = $picturefile['size'];
+    $stock = $_POST['stock'];
 
     // echo $filename;
 
@@ -33,9 +34,9 @@ if (isset($_POST['add-item'])) {
     $uploadpath = 'itemImages/' . $_COOKIE['uid'] . '--' . $picturefile['name'];
     // $status = move_uploaded_file($picturefile['tmp_name'], $uploadpath);
     $id = $_COOKIE['uid'] - 999;
-    $sql = "INSERT INTO item(name,discription,price,view_count,pic_url,location,type,user_id)
+    $sql = "INSERT INTO item(name,discription,price,stock,view_count,pic_url,location,type,user_id)
         VALUES(
-            '{$itemname}','{$discription}',{$price},0,'{$uploadpath}',
+            '{$itemname}','{$discription}',{$price},{$stock},0,'{$uploadpath}',
             '{$location}','{$type}',{$id}
         )
     ";
@@ -65,18 +66,19 @@ if (isset($_POST['update-item']) && isset($_POST['type'])) {
     $newPrice = htmlentities($_POST['itemprice']);
     $newDiscription = htmlentities(trim($_POST['discription']));
     $newLocation = htmlentities($_POST['location']);
+    $stock = $_POST['stock'];
 
     if (empty($newDiscription) && empty($newName) && empty($newPrice) && empty($newLocation)) {
         $_SESSION['update-error'] = 'please fill out all the fields!';
         header("Location:{$_SERVER['HTTP_REFERER']}");
     }
 
-    $sql = $conn->prepare("UPDATE item SET name=? , price=? , location=? , discription=? WHERE id=?");
+    $sql = $conn->prepare("UPDATE item SET name=? , price=? , location=? ,stock=?, discription=? WHERE id=?");
     if (!$sql) {
         $_SESSION['update-error'] = 'update failed!';
         header("Location:{$_SERVER['HTTP_REFERER']}");
     }
-    $sql->bind_param('sdssi', $newName, $newPrice, $newLocation, $newDiscription, $itemid);
+    $sql->bind_param('sdsisi', $newName, $newPrice, $newLocation, $stock, $newDiscription, $itemid);
 
     if ($sql->execute()) {
         $_SESSION['update-success'] = 'Update Successful!';

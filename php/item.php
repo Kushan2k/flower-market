@@ -59,6 +59,14 @@ https://templatemo.com/tm-546-sixteen-clothing
   <link rel="stylesheet" href="../assets/css/templatemo-sixteen.css">
   <!-- <link rel="stylesheet" href="../assets/css/item.css"> -->
 
+  <style>
+    .amout {
+      color: green;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
+
 </head>
 
 <body>
@@ -142,7 +150,7 @@ https://templatemo.com/tm-546-sixteen-clothing
       <div class="row g-0">
         <?php
 
-        $sql = "SELECT name,discription,price,view_count,location,pic_url,post_date,user_id,type
+        $sql = "SELECT name,discription,price,stock,view_count,location,pic_url,post_date,user_id,type
           FROM item WHERE id={$itemID}
           ";
         $result = $conn->query($sql);
@@ -181,6 +189,8 @@ https://templatemo.com/tm-546-sixteen-clothing
                       <p class='m-3'>{$row['type']}</p>
                       <p class='text-muted'>{$row['post_date']}</p>
                       <P class='text-danger'>Views ({$row['view_count']})</p>
+                      <br><br>
+                      <p><span class='amout'>{$row['stock']}</span> in Stocks</p>
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>
                       
@@ -220,6 +230,8 @@ https://templatemo.com/tm-546-sixteen-clothing
                       <p class='m-3'>{$row['type']}</p>
                       <p class='text-muted'>{$row['post_date']}</p>
                       <P class='text-danger'>Views ({$row['view_count']})</p><br><hr>
+                      
+                      <p><span class='amout'>{$row['stock']}</span> in Stocks</p>
                       <h5><a href='./user.php?owner_id={$owner}'>Owner</a></h5>
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>
@@ -257,6 +269,8 @@ https://templatemo.com/tm-546-sixteen-clothing
                       <p class='m-3'>{$row['type']}</p>
                       <p class='text-muted'>{$row['post_date']}</p>
                       <P class='text-danger'>Views ({$row['view_count']})</p><br><hr>
+                      
+                      <p><<span class='amout'>>{$row['stock']}</span> in Stocks</p>
                       <h5><a href='./user.php?owner_id={$owner}'>Owner</a></h5>
                     </div>
                     <div class='buttons d-flex flex-row mt-5 gap-3'>

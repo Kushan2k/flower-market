@@ -181,6 +181,10 @@ https://templatemo.com/tm-546-sixteen-clothing
       justify-content: space-around;
       align-items: center;
     }
+
+    .count {
+      font-weight: 400;
+    }
   </style>
 
 
@@ -197,7 +201,7 @@ https://templatemo.com/tm-546-sixteen-clothing
         </div>
         <?php
         //sql query for geting data
-        $sql = "SELECT id,name,discription,price,pic_url,user_id FROM item ORDER BY post_date DESC LIMIT 20";
+        $sql = "SELECT id,name,discription,stock,price,pic_url,user_id FROM item ORDER BY post_date DESC LIMIT 20";
         $res = $conn->query($sql);
         if ($res == TRUE) {
           if ($res->num_rows > 0) {
@@ -220,6 +224,9 @@ https://templatemo.com/tm-546-sixteen-clothing
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
                           </div>
+                          <div class='down-content mb-3'>
+                            <h6 class='count'>{$row['stock']}- items in stock</h6>
+                          </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
                             <button class='btn btn-outline-dark mt-md-2 cart-btn' data-itemid='{$itemID}'>Add To Basket</button>
@@ -239,6 +246,9 @@ https://templatemo.com/tm-546-sixteen-clothing
                             </a>
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
+                          </div>
+                          <div class='down-content mb-3'>
+                            <h6 class='count'>{$row['stock']}- items in stock</h6>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
@@ -260,6 +270,9 @@ https://templatemo.com/tm-546-sixteen-clothing
                             </a>
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
+                          </div>
+                          <div class='down-content mb-3'>
+                            <h6 class='count'>{$row['stock']}- items in stock</h6>
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./php/item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
