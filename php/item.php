@@ -286,7 +286,7 @@ https://templatemo.com/tm-546-sixteen-clothing
     <div class="popup-cart mx-auto  ">
       <div class="alert alert-success cart-alert">
         <h2 class="m-3 text-center text-msg"></h2>
-        <a class="btn btn-success" href="./php/cart.php?uid=<?php echo $_COOKIE["uid"]; ?>">
+        <a class="btn btn-success" href="./cart.php?uid=<?php echo $_COOKIE["uid"]; ?>">
           <i class=" fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);">
           </i><span class="ml-3">View</span></a>
         <button class="btn btn-danger close-popup">Later</button>

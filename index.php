@@ -271,10 +271,10 @@ https://templatemo.com/tm-546-sixteen-clothing
               }
             }
           } else {
-            echo "<p class='alert alert-warning text-center'>No Items Yet!<br>Keep Wait</p>";
+            echo "<p class='alert alert-warning text-center w-100'>No Items Yet!<br>Keep Wait</p>";
           }
         } else {
-          echo "<p class='alert alert-danger text-center w-100'>Connecting error! <br>Please contact us..<a href='./php/contact.php'>in Here</a></p>";
+          echo "<p class='alert w-100 alert-danger text-center w-100'>Connecting error! <br>Please contact us..<a href='./php/contact.php'>in Here</a></p>";
         }
 
 
@@ -376,6 +376,7 @@ https://templatemo.com/tm-546-sixteen-clothing
       btns.forEach(function(btn) {
         btn.addEventListener('click', function(event) {
           const xhr = new XMLHttpRequest()
+
 
 
           xhr.onreadystatechange = function() {

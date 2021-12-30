@@ -4,6 +4,7 @@
 
 include_once "./conn.php";
 
+
 if (isset($_COOKIE['uid']) && $_COOKIE['u_email']) {
     $login = true;
 } else if (isset($_GET['owner_id'])) {
