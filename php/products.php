@@ -233,7 +233,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                           </div>
                           <div class='mb-4 px-3 d-flex justify-content-between flex-md-column'>
                             <a href='./item.php?item={$itemID}' class='btn btn-outline-dark'>Go To Product</a>
-                            <button class='btn btn-outline-dark mt-md-2'>Add To Basket</button>
+                            <button class='btn btn-outline-dark mt-md-2 cart-btn' data-itemid='{$itemID}'>Add To Basket</button>
                           </div>
                         </div>
                       </div>
@@ -290,6 +290,36 @@ https://templatemo.com/tm-546-sixteen-clothing
       </div>
     </div>
   </div>
+  <div class="cover popup-cart d-none">
+    <div class="popup-cart mx-auto  ">
+      <div class="alert alert-success cart-alert">
+        <h2 class="m-3 text-center text-msg"></h2>
+        <a class="btn btn-success" href="./cart.php?uid=<?php echo $_COOKIE["uid"]; ?>">
+          <i class=" fa fa-cart-arrow-down" aria-hidden="true" style="transform: scale(1.8);">
+          </i><span class="ml-3">View</span></a>
+        <button class="btn btn-danger close-popup">Later</button>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .popup-cart {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      z-index: 100000;
+      right: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+
+    }
+
+    .cover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+  </style>
 
 
   <footer>
@@ -311,6 +341,13 @@ https://templatemo.com/tm-546-sixteen-clothing
   <script src="../vendor/jquery/jquery.min.js"></script>
   <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <script>
+    const closebtn = document.querySelector('.close-popup')
+    closebtn.addEventListener('click', () => {
+      document.querySelector('.popup-cart').classList.add('d-none')
+    })
+  </script>
+
 
   <!-- Additional Scripts -->
   <script src="../assets/js/custom.js"></script>
@@ -329,6 +366,47 @@ https://templatemo.com/tm-546-sixteen-clothing
         t.style.color = '#fff';
       }
     }
+  </script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var btns = document.querySelectorAll('.cart-btn');
+      btns.forEach(function(btn) {
+        btn.addEventListener('click', function(event) {
+          const xhr = new XMLHttpRequest()
+
+
+
+          xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+              // alert(xhr.responseText);
+              if (this.responseText == 1) {
+                document.querySelector('.text-msg').innerHTML = 'Item Added To Cart'
+                document.querySelector('.cart-alert').classList.remove('alert-danger')
+                document.querySelector('.cart-alert').classList.add('alert-success')
+              } else {
+                document.querySelector('.text-msg').innerHTML = 'Item already in the cart'
+                document.querySelector('.cart-alert').classList.remove('alert-success')
+                document.querySelector('.cart-alert').classList.add('alert-danger')
+
+              }
+              document.querySelector('.popup-cart').classList.remove('d-none')
+
+            }
+
+          }
+          xhr.open('GET', `./addtocart.php?addtocart=true&itemid=${event.target.dataset.itemid}`)
+          xhr.send()
+
+        })
+      })
+
+      setTimeout(() => {
+        var error = document.querySelector('.error');
+        if (error) {
+          error.remove()
+        }
+      }, 3000)
+    })
   </script>
 
 

@@ -209,7 +209,7 @@ https://templatemo.com/tm-546-sixteen-clothing
               $itemID = (int)$row['id'] + 1254;
               $formatedprice = number_format((float)$row['price'], 2, '.', ',');
 
-
+              $name = ucfirst($row['name']);
               if (isset($_COOKIE['uid'])) {
                 if (($_COOKIE['uid'] - 999) != $row['user_id']) {
                   echo
@@ -219,7 +219,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                           <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
                             <a href='./php/item.php?item={$itemID}'>
-                              <h4>{$row['name']}</h4>
+                              <h4>{$name}</h4>
                             </a>
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
@@ -235,6 +235,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                       </div>
                   ";
                 } else {
+
                   echo
                   "
                       <div class='col-md-4 col-12 all des'>
@@ -242,7 +243,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                           <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
                             <a href='./php/item.php?item={$itemID}'>
-                              <h4>{$row['name']}</h4>
+                              <h4>{$name}</h4>
                             </a>
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
@@ -266,7 +267,7 @@ https://templatemo.com/tm-546-sixteen-clothing
                           <a href='./php/item.php?item={$itemID}'><img src='./php/{$row['pic_url']}' alt=''></a>
                           <div class='down-content'>
                             <a href='./php/item.php?item={$itemID}'>
-                              <h4>{$row['name']}</h4>
+                              <h4>{$name}</h4>
                             </a>
                             <h6>LKR {$formatedprice}</h6>
                             <p>{$row['discription']}.</p>
