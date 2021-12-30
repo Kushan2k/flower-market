@@ -68,10 +68,10 @@ https://templatemo.com/tm-546-sixteen-clothing
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./products.php">Products</a>
+              <a class="nav-link" href="./products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./products.php">Trending</a>
+              <a class="nav-link" href="./products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="./about.php">About Us</a>
@@ -110,11 +110,27 @@ https://templatemo.com/tm-546-sixteen-clothing
       <div class="row">
         <div class="col-md-12">
           <div class="text-content">
-            <h4>about us</h4>
-            <h2>our company</h2>
+            <h4 style="color: white;">about us</h4>
+            <h2>our Platform</h2>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-11 mx-auto mb-3">
+      <h4>We are Providing customers with our best service 24/7</h4>
+    </div>
+    <div class="col-12 col-md-10 mx-auto">
+      <p>We offer the best and most delectable range of flowers,flower products by our own local sellers
+        who have years of experience in the confectioneries and comes with the guarantee of beautiful,
+        decorations and true value for money</p>
+    </div>
+    <div class="col-12 col-md-10 mx-auto mt-4">
+      <p><b><a href="../index.php" style="text-decoration: none;color:red;">Dreamweaver Flowers</a></b> is your digital guide to discovering flowers and other related establishments
+        in Sri Lanka and promoting the local flowers. People visit our platform to read about our discoveries within the city,
+        especially when deciding on decorating. Simply buy and sell, Dreamweaver Flowers is your friend in the country.</p>
     </div>
   </div>
 
