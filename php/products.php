@@ -110,10 +110,10 @@ https://templatemo.com/tm-546-sixteen-clothing
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="./products.php?view=all">Products</a>
+              <a class="nav-link <?= !$trending ? 'active' : ''; ?>" href="./products.php?view=all">Products</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="./products.php?view=trending">Trending</a>
+              <a class="nav-link <?= $trending ? 'active' : ''; ?>" href="./products.php?view=trending">Trending</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="./aboutus.php">About Us</a>
